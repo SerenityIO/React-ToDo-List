@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ToDo list</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    
+</head>
+<body>
+    <main>
+        <h3>My To Do List</h3>
+        <form onsubmit="handleSubmitForm(event)">
+            <input required placeholder="Enter Name" title="This field should not be left blank." type="text" />
+            <button type="submit">Add</button>
+        </form>
+        <ul id="list">
+            <li>Test</li>
+            <li>Test 2</li>
+            <li>Test 3</li>
+        </ul>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>
