@@ -1,0 +1,87 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+header{
+    width: 100%;
+    background-color: rgb(244, 67, 54);
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header h3{
+    color: white;
+}
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+form input{
+    height: 25px;
+    width: 64%;
+    padding-left: 3px;
+}
+form button{
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    padding: 2px;
+}
+#list{
+    list-style-type: none;
+}
+#list li{
+    display: flex;
+    height: 32px;
+    padding-left: 32px;
+    align-items: center;
+}
+#list li:nth-child(even){
+    background-color: rgb(238, 238, 238);
+}
+#list li:nth-child(odd){
+    background-color: rgb(249, 249, 249);
+}
+.active{
+    transition: all.3s ease;
+    text-decoration: line-through;
+}
+#list li.active{
+    transition: all.3s ease;
+    background-color: rgb(160, 154, 154);
+    color: rgb(211, 210, 210);
+    background-image: url(image/checked.svg);
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position-x: 8px;
+    background-position-y: 8px;
+    border-bottom: 1px solid silver;
+    border-top: 1px solid silver;
+}
+.active div{
+    opacity: 1;
+    transition: all.6s ease;
+}
+.button{
+    position: absolute;
+    display: block;
+    right: 0;
+    background-image: url(image/unchecked.svg);
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    background-size: 12px;
+    background-position-x: 10px;
+    background-position-y: 10px;
+    opacity: 0;
+    transition: all.6s ease;
+}
+.button:hover{
+    opacity: 1;
+    transition: all.6s ease;    
+}
