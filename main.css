@@ -78,7 +78,7 @@ form button{
     background-size: 12px;
     background-position-x: 10px;
     background-position-y: 10px;
-    opacity: 0;
+    opacity: 0.05;
     transition: all.6s ease;
 }
 .button:hover{
