@@ -16,6 +16,10 @@
                 <input placeholder="Tide" required  required type="text" />
                 <button type="submit">Add</button>
             </form>
+            <menu>
+                <input type="checkbox" name="all" id="all" onclick="checkAll(event);">
+                <button type="submit" onclick="removeCheck(event);" id="deleteAll">Remove</button>
+            </menu>
         </header>
         <ul id="list"></ul>
     </main>
