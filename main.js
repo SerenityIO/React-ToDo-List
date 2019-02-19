@@ -17,7 +17,7 @@ var array = [
 window.onload = function() {
     var arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('array'));
     
-    if (arrayFromlocalStorage) {
+    if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
         array = arrayFromlocalStorage;
     }
     render();
@@ -28,8 +28,8 @@ window.onunload = () => {
 };
 
 function render() {
-    for (let i = 0; i < array.length; i++) {
-
+    list.innerHTML = '';
+    for (let i = 0; i < array.length; i++) {     
         var li = document.createElement('li');
         var check = document.createElement('input');
         var div = document.createElement('div');
@@ -37,31 +37,54 @@ function render() {
         var done = document.createElement('button');
         var edit = document.createElement('button');
         var copy = document.createElement('button');
-    
+        
         done.type = 'submit';
-        done.innerText = 'Done';
-        done.className = 'Done';
-        done.addEventListener('click', audit);
+        done.addEventListener('click', function() {
+            audit(i);
+        });
+        if(array[i].done) {
+            done.innerText = 'Undone';
+            done.className = 'Undone';
+            li.style.backgroundColor = "rgb(193, 255, 193)";
+            li.style.borderTop = "1px solid rgb(0, 255, 13)";
+            li.style.borderBottom = "1px solid rgb(0, 255, 13)";
+            li.style.height = "30px";
+        } else {
+            done.innerText = 'Done';
+            done.className = 'Done';
+            li.style.backgroundColor = "";
+            li.style.border = "";
+            li.style.height = "";
+        }
+        
         edit.type = 'submit';
         edit.innerText = 'Edit';
         edit.className = 'Edit';
-        edit.addEventListener('click', editText);
+        edit.addEventListener('click', function(){
+            editText(i);
+        });
+
         copy.type = 'submit';
         copy.innerText = 'Copy';
         copy.className = 'Copy';
+
         but.className = "DoneEditCopy";
         but.appendChild(done);
         but.appendChild(edit);
         but.appendChild(copy);
-        
 
         check.type = "checkbox";
         check.className = "check"; 
-        check.addEventListener('click', paint);
+        check.addEventListener('click', function(){
+
+        });
 
         li.innerText = array[i].name;
+        li.id = i;
         
-        div.addEventListener('click', remove);
+        div.addEventListener('click', function(){
+            remove(i);
+        });
         
         div.className = "button";
         li.appendChild(check);
@@ -72,56 +95,17 @@ function render() {
 }
 
 function handleSubmitForm(event) {
-
     event.preventDefault();
     
     var li = document.createElement('li');
-    var check = document.createElement('input');
-    var div = document.createElement('div');
-    var but = document.createElement('div');
-    var done = document.createElement('button');
-    var edit = document.createElement('button');
-    var copy = document.createElement('button');
-
-    done.type = 'submit';
-    done.innerText = 'Done';
-    done.className = 'Done';
-    done.addEventListener('click', audit);
-    edit.type = 'submit';
-    edit.innerText = 'Edit';
-    edit.className = 'Edit';
-    edit.addEventListener('click', editText);
-    copy.type = 'submit';
-    copy.innerText = 'Copy';
-    copy.className = 'Copy';
-    but.className = "DoneEditCopy";
-    but.appendChild(done);
-    but.appendChild(edit);
-    but.appendChild(copy);
-    
-    check.type = "checkbox";
-    check.className = "check";
-    check.addEventListener('click', paint);
-
-    div.addEventListener('click', remove);
-    div.className = "button";
     
     li.innerText = event.target[0].value;
-    li.appendChild(check);
-    li.appendChild(div);
-    li.appendChild(but);
-    list.appendChild(li);
     array.push({
         name: event.target[0].value,
         done: false
     });
     event.target.reset();
-}
-
-function remove(event){
-    var per = event.target.parentNode;
-
-    list.removeChild(per);
+    render();
 }
 
 function checkAll(){
@@ -154,38 +138,22 @@ function removeCheck(event){
     }
 }
 
-function paint(){
-    var per = event.target.parentNode;
-
-    per.className = (this.checked) ? 'red' : '';
+function remove(id){
+    array = array.filter(function(value, index){
+        return id != index;
+    });
+    render();
 }
 
-function audit(event){
-    var per = event.target.parentNode;
-    var pers = per.parentNode;
-
-    this.className = (this.className == "Done") ? 'Undone' : 'Done';
-    this.innerText = (this.innerText == "Done") ? 'Undone' : 'Done';
-    if (this.className == "Undone"){
-        pers.style.backgroundColor = "rgb(193, 255, 193)";
-        pers.style.borderTop = "1px solid rgb(0, 255, 13)";
-        pers.style.borderBottom = "1px solid rgb(0, 255, 13)";
-        pers.style.height = "30px";
-    } else {
-        pers.style.backgroundColor = "";
-        pers.style.border = "0";
-        pers.style.height = "32px";
-    }
+function audit(id){
+    array[id].done = !array[id].done;
+    render();
 }
 
-function editText(event) {
+function editText(id) {
     var newName = prompt('Write new name this row', );
     if(newName != 0){
-        var per = event.target.parentNode;
-        var pers = per.parentNode;
-        var text = pers.childNodes[0];
-
-        text.nodeValue = newName;
+        array[id].name = newName; 
     }
-
+    render();
 }
