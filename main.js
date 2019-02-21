@@ -98,7 +98,6 @@ function render() {
         }  
     }
 }
-
 function handleSubmitForm(event) {
     event.preventDefault();
     
@@ -127,43 +126,52 @@ function copyrate(id){
 }
 
 function checkLi(id){
-    // var del = document.getElementsByClassName('check');
     var li = document.getElementsByTagName('li');
-    debugger;
-    // li[id].className = (this.checked == true) ? 'red' : '';
-    li[id].className = "red";
-    debugger;
+    var box = document.getElementsByClassName('check');
+   
+    li[id].className = (box[id].checked) ? 'red' : '';
 }
 
-// function checkAll(){
-//     var check = document.getElementsByClassName('check');
-//     var all = document.getElementById('all');
-//     if(all.checked){
-//         for (var i = 0; i < check.length; i++){
-//             var per = check[i].parentNode;
-            
-//             check[i].checked = true;
-//             per.className = 'red';
-//         }
-//     } else {
-//         for (var i = 0; i < check.length; i++){
-//             var per = check[i].parentNode;
-            
-//             check[i].checked = false;
-//             per.className = '';
-//         }
-//     }
-// }
+function removeCheck(){
+    var box = document.getElementsByClassName('check');
+    var redLi = document.getElementsByClassName('red');
+    var size = redLi.length;
+    
+    for(var j = 0; j < size; j++){
+        for(var i = 0; i < array.length; i++){
+            if(array[i]){
+                if(box[i].checked){
+                    array = array.filter(function(value, index){
+                        return i != index;
+                    });
+                }
+            }
+        }
+    }
+    var MainCheck = document.getElementById('all');
+    MainCheck.checked = false;
+    render();
+}
 
-// function removeCheck(event){
-//     var redLi = document.getElementsByClassName('red');
-//     var all = document.getElementById('all');
-
-//     all.checked = false;
-//     for (var i = redLi.length - 1; i >= 0; i--) {
-//         list.removeChild(redLi[i]);
-//     }
-// }
+function checkAll(){
+    var check = document.getElementsByClassName('check');
+    var all = document.getElementById('all');
+    if(all.checked){
+        for (var i = 0; i < check.length; i++){
+            var per = check[i].parentNode;
+            
+            check[i].checked = true;
+            per.className = 'red';
+        }
+    } else {
+        for (var i = 0; i < check.length; i++){
+            var per = check[i].parentNode;
+            
+            check[i].checked = false;
+            per.className = '';
+        }
+    }
+}
 
 function remove(id){
     array = array.filter(function(value, index){
