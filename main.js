@@ -134,17 +134,11 @@ function checkLi(id){
 
 function removeCheck(){
     var box = document.getElementsByClassName('check');
-    
-    for(var i = array.length - 1; i >= 0; i--){
-        if(array[i]){
-            if(box[i].checked){
-                array = array.filter(function(value, index){
-                    return i != index;
-                });
-            }
-        }
-    }
     var MainCheck = document.getElementById('all');
+    
+    array = array.filter(function(value, index){
+        return !box[index].checked;
+    });
     MainCheck.checked = false;
     render();
 }
