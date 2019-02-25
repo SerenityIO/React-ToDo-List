@@ -99,6 +99,10 @@ menu input{
     align-items: center;
     margin: 2px auto;
     padding: 3px;
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: 1px solid rgb(131, 131, 131);
 }
 #list li.red{
     transition: all.3s ease;
@@ -117,7 +121,9 @@ menu input{
 }
 .Done, .Edit, .Copy, .Undone{
     margin: 0 5px;
-    padding: 1px 5px; 
+    padding: 1px 5px;
+    border-radius: 5px;
+    border: 1px solid gray; 
 }
 .Undone{
     transition: all.3s ease;
@@ -129,4 +135,12 @@ menu input{
     transition: all.3s ease;
     background-color: green;
     color: rgb(255, 255, 255);
+}
+#load{
+    margin-right: 5px;
+    padding: 5px;
+    background-color: green;
+    color: white;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
 }

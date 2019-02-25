@@ -1,35 +1,48 @@
 var list = document.getElementById('list');
-var array = [
-    {
-        name: 'Test',
-        done: false
-    },{
-        name: 'Test 2',
-        done: false
-    },{
-        name: 'Test 3',
-        done: false
-    },{
-        name: 'Test 4',
-        done: false
-    }
-];
+var array = [];
+// 1. Создаём новый объект XMLHttpRequest
+var xhr = new XMLHttpRequest();
 
-window.onload = function() {
-    var arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('array'));
+// 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos', true);
+
+// 3. Отсылаем запрос
+xhr.send();
+
+xhr.onreadystatechange = function() { // (3)
     
-    if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
-        array = arrayFromlocalStorage;
+    if (xhr.readyState != 4) return;
+  
+    // document.write('Готово!');
+  
+    if (xhr.status != 200) {
+      alert(xhr.status + ': ' + xhr.statusText);
+    } else {
+      try {
+        var arr = JSON.parse(xhr.responseText);
+      } catch (e){
+        alert("error");
+      }
     }
+    SaveArray(arr);
+    window.onunload = () => {
+      window.localStorage.setItem('array', JSON.stringify(array));
+    };
     render();
-};
+  }
 
-window.onunload = () => {
-    window.localStorage.setItem('array', JSON.stringify(array));
+
+  function SaveArray(mas){
+    mas.forEach(function(arr) {
+      array.push({
+        name: arr.title,
+        done: arr.compleated,
+        id: arr.id
+    });
+    });
     render();
-};
-
-function render() {
+  }
+  function render() {
     list.innerHTML = '';
     for (let i = 0; i < array.length; i++) {
         if(array[i]) {
@@ -94,92 +107,93 @@ function render() {
         }  
     }
 }
-function handleSubmitForm(event) {
-    event.preventDefault();
-    
-    var li = document.createElement('li');
-    var check = document.createElement('input');
-    
-    check.type = "checkbox";
-    check.className = "check"; 
-    li.appendChild(check);
 
-    li.innerText = event.target[0].value;
-    array.push({
-        name: event.target[0].value,
-        done: false
-    });
-    event.target.reset();
-    render();
+
+  
+function handleSubmitForm(event) {
+  event.preventDefault();
+  
+  var li = document.createElement('li');
+  var check = document.createElement('input');
+  
+  check.type = "checkbox";
+  check.className = "check"; 
+  li.appendChild(check);
+
+  li.innerText = event.target[0].value;
+  array.push({
+      name: event.target[0].value,
+      done: false
+  });
+  event.target.reset();
+  render();
 }
 
 function copyrate(id){
-    array.push({
-        name: array[id].name,
-        done: array[id].done
-    });
-    render();
+  array.push({
+      name: array[id].name,
+      done: array[id].done
+  });
+  render();
 }
 
 function checkLi(id){
-    var li = document.getElementsByTagName('li');
-    var box = document.getElementsByClassName('check');
-   
-    li[id].className = (box[id].checked) ? 'red' : '';
+  var li = document.getElementsByTagName('li');
+  var box = document.getElementsByClassName('check');
+ 
+  li[id].className = (box[id].checked) ? 'red' : '';
 }
 
 function removeCheck(){
-    var box = document.getElementsByClassName('check');
-    var MainCheck = document.getElementById('all');
+  var box = document.getElementsByClassName('check');
+  var MainCheck = document.getElementById('all');
 
-    array = array.filter(function(value, index){
-        return !box[index].checked;
-    });
-    MainCheck.checked = false;
-    render();
+  array = array.filter(function(value, index){
+      return !box[index].checked;
+  });
+  MainCheck.checked = false;
+  render();
 }
 
 function checkAll(){
-    var check = document.getElementsByClassName('check');
-    var all = document.getElementById('all');
-    
-    if(all.checked){
-        for (var i = 0; i < check.length; i++){
-            var per = check[i].parentNode;
-            
-            check[i].checked = true;
-            per.className = 'red';
-        }
-    } else {
-        for (var i = 0; i < check.length; i++){
-            var per = check[i].parentNode;
-            
-            check[i].checked = false;
-            per.className = '';
-        }
-    }
+  var check = document.getElementsByClassName('check');
+  var all = document.getElementById('all');
+  
+  if(all.checked){
+      for (var i = 0; i < check.length; i++){
+          var per = check[i].parentNode;
+          
+          check[i].checked = true;
+          per.className = 'red';
+      }
+  } else {
+      for (var i = 0; i < check.length; i++){
+          var per = check[i].parentNode;
+          
+          check[i].checked = false;
+          per.className = '';
+      }
+  }
 }
 
 function remove(id){
-    array = array.filter(function(value, index){
-        return id != index;
-    });
-    render();
+  array = array.filter(function(value, index){
+      return id != index;
+  });
+  render();
 }
 
 function audit(id){
-    array[id].done = !array[id].done;
-    render();
+  array[id].done = !array[id].done;
+  render();
 }
 
 function editText(id) {
-    var newName = prompt('Write new name this row', );
-    if(newName != 0){
-        array[id].name = newName; 
-    }
-    render();
+  var newName = prompt('Write new name this row', );
+  if(newName != 0){
+      array[id].name = newName; 
+  }
+  render();
 }
 
-function WindowReplace(){
-    window.location.replace('load.html');
-}
+
