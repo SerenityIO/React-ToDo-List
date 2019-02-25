@@ -5,7 +5,7 @@ var array = [];
 var xhr = new XMLHttpRequest();
 
 // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
-xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos', true);
 
 // 3. Отсылаем запрос
 xhr.send();
@@ -21,6 +21,7 @@ xhr.onreadystatechange = function() { // (3)
     } else {
       try {
         var arr = JSON.parse(xhr.responseText);
+
       } catch (e){
         alert("error");
       }
@@ -32,7 +33,6 @@ xhr.onreadystatechange = function() { // (3)
     render();
   }
 
-
   function SaveArray(mas){
     mas.forEach(function(arr) {
       array.push({
@@ -43,6 +43,7 @@ xhr.onreadystatechange = function() { // (3)
     });
     render();
   }
+
   function render() {
     list.innerHTML = '';
     for (let i = 0; i < array.length; i++) {
@@ -191,6 +192,7 @@ function audit(id){
 
 function editText(id) {
   var newName = prompt('Write new name this row', );
+  
   if(newName != 0){
       array[id].name = newName; 
   }
