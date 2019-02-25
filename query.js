@@ -1,10 +1,11 @@
 var list = document.getElementById('list');
 var array = [];
+
 // 1. Создаём новый объект XMLHttpRequest
 var xhr = new XMLHttpRequest();
 
 // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
-xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos', true);
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
 
 // 3. Отсылаем запрос
 xhr.send();
@@ -195,5 +196,3 @@ function editText(id) {
   }
   render();
 }
-
-
