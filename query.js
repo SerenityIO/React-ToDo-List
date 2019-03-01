@@ -13,11 +13,10 @@ xhr.send();
 xhr.onreadystatechange = function() { // (3)
     
     if (xhr.readyState != 4) return;
+    // document.write('Готово!');
     document.getElementById("Load").style.display = "none";
     document.getElementById("image").style.display = "none";
     document.getElementById("main").style.opacity = "1";
-    // document.write('Готово!');
-  
     if (xhr.status != 200) {
         alert(xhr.status + ': ' + xhr.statusText);
     } else {
@@ -213,4 +212,8 @@ function editText(id) {
 //   }, 2000);
 
 // };
-
+// $(function () {
+//   document.getElementById("Load").style.display = "none";
+//   document.getElementById("image").style.display = "none";
+//   document.getElementById("main").style.opacity = "1";
+// });
