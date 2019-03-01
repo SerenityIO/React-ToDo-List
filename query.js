@@ -13,23 +13,25 @@ xhr.send();
 xhr.onreadystatechange = function() { // (3)
     
     if (xhr.readyState != 4) return;
-  
+    document.getElementById("Load").style.display = "none";
+    document.getElementById("image").style.display = "none";
+    document.getElementById("main").style.opacity = "1";
     // document.write('Готово!');
   
     if (xhr.status != 200) {
-      alert(xhr.status + ': ' + xhr.statusText);
+        alert(xhr.status + ': ' + xhr.statusText);
     } else {
       try {
         var arr = JSON.parse(xhr.responseText);
-
+        
       } catch (e){
         alert("error");
       }
     }
     SaveArray(arr);
-    window.onunload = () => {
-      window.localStorage.setItem('array', JSON.stringify(array));
-    };
+    // window.onunload = () => {
+    //   window.localStorage.setItem('array', JSON.stringify(array));
+    // };
     render();
   }
 
@@ -198,3 +200,17 @@ function editText(id) {
   }
   render();
 }
+
+
+// window.onload = function() {
+
+//   setTimeout(function() {
+
+//     document.getElementById("Load").style.display = "none";
+//     document.getElementById("image").style.display = "none";
+//     document.getElementById("main").style.opacity = "1";
+
+//   }, 2000);
+
+// };
+
