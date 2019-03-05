@@ -1,11 +1,6 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import './css/mainSite.css';
-import mainSite from './App/mainSite';
-import headSite from './App/headSite';
-import listSite from './App/listSite';
+import MainSite from './App/MainSite';
 
-headSite();
-listSite();
-
-render(<mainSite />, document.getElementById('root'));
+render(<MainSite />, document.getElementById('root'));
