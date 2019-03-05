@@ -1,13 +1,11 @@
-import React from 'react'
-import '../css/list.css'
-import listElement from './listElement'
+import React from 'react';
+import '../css/list.css';
+import ListElement from './ListElement';
 
-function listSite(){
-    return (
-        <ul>
-            <listElement />
-        </ul>
-    )
-}
+const ListSite = () => (
+    <ul>
+        <ListElement />
+    </ul>
+);
 
-export default listSite
+export default ListSite;

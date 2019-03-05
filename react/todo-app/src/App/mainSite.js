@@ -1,15 +1,17 @@
-import React from 'react'
-// import '../css/mainSite.css'
-import headSite from './headSite'
-import listSite from './listSite'
+import React from 'react';
+// import '../css/mainSite.css';
+import HeadSite from './HeadSite';
+import ListSite from './ListSite';
 
-function mainSite() {
-    return (
-        <main>
-            <headSite />
-            <listSite />
-        </main>
-    )
-}
+class MainSite extends React.Component {
+    render() {
+        return (
+            <main>
+                <HeadSite />
+                <ListSite />
+            </main>
+        );
+    };
+};
 
-export default mainSite
+export default MainSite;
