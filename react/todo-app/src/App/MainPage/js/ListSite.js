@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/list.css';
+import '../css/List.css';
 import ListElement from './ListElement';
 
 const ListSite = () => (

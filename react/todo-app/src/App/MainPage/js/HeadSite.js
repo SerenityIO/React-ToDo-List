@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/headSite.css';
+import '../css/HeadSite.css';
 
 const HeadSite = () => (
     <header>
@@ -9,9 +9,8 @@ const HeadSite = () => (
             <button type='submit'>Add</button>
         </form>
         <menu>
-            <input type="checkbox" name="all" id="all" onclick="checkAll(event);" />
-            <button type="submit" onclick={removeCheck} id="deleteAll">Remove</button>
-            <button type='submit' onclick="WindowReplace();" id='load'>Load</button>
+            {/* <input type="checkbox" name="all" id="all" onclick={checkAll} />
+            <button type="submit" onclick={removeCheck} id="deleteAll">Remove</button> */}
         </menu>
     </header>
 );

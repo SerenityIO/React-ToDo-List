@@ -1,0 +1,67 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+#body{
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title{
+    font-family: sans-serif;
+    font-size: 20pt;
+    margin-bottom: 3px;
+}
+#LandP{
+    margin-left: 10px;
+}
+#LandP p{
+    font-family: sans-serif;
+    font-size: 9pt;
+    margin-top: 4px;
+    margin-bottom: 1px;
+}
+#login, #password{
+    height: 18px;
+    width: 250px;
+}
+#login, #password, #SignIn{
+    margin: 0 auto;
+    padding: 2px;
+    padding-left: 3px;
+    border: none;
+    border: solid 1px silver;
+    border-radius: 2px;
+    margin-bottom: 8px;
+}
+#SignIn{
+    background-color: green;
+    color: white;
+    height: 28px;
+    width: 60px;
+    border: none;
+    border-radius: 5px;
+    transition: all.6s ease;
+    -moz-transition: all.6s ease;
+    -webkit-transition: all.6s ease;
+}
+#SignIn:hover{
+    background-color: rgb(98, 255, 98);
+    color: rgb(0, 56, 3);
+    height: 28px;
+    width: 60px;
+    border: none;
+    border-radius: 5px;
+    transition: all.6s ease;
+    -moz-transition: all.6s ease;
+    -webkit-transition: all.6s ease;
+}
+#err{
+    background-color: rgb(255, 132, 123);
+    font-family: sans-serif;
+    font-size: 9pt;
+    padding: 8px 10px 8px 10px;
+    border-radius: 6px;
+    display: none;
+}

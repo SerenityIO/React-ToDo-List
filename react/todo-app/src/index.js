@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import './css/mainSite.css';
-import MainSite from './App/MainSite';
+import LoginPage from './App/LoginPage/LoginPage';
+// import './MainPage/css//MainSite.css';
+// import MainSite from './App/MainPage/js/MainSite';
 
-render(<MainSite />, document.getElementById('root'));
+render(<LoginPage />, document.getElementById('root'));
