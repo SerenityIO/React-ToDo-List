@@ -1,7 +1,14 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
+  
 import './LoginPage.css';
 
 class LoginPage extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {};
+    }
 
     ViewError = (e) => {
         e.preventDefault();
@@ -11,7 +18,7 @@ class LoginPage extends React.Component {
 
         if (password === "Admin" && login === "Admin") {
             document.getElementById("err").style.display = "none";
-            alert("Work!");
+            this.props.history.push('/list');
         } else {
             document.getElementById("err").style.display = "block";
         }
@@ -39,4 +46,4 @@ class LoginPage extends React.Component {
     };
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);

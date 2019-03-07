@@ -1,10 +1,10 @@
 import React from 'react';
 import '../css/HeadSite.css';
 
-const HeadSite = () => (
+const HeadSite = (props) => (
     <header>
-        <h3>My ToDo-List</h3>
-        <form>
+        <h3>{props.title}</h3>
+        <form onSubmit={props.handleSubmit}>
             <input placeholder="Tide" required required type="text" />
             <button type='submit'>Add</button>
         </form>

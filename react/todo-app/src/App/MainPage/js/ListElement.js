@@ -1,8 +1,8 @@
 import React from 'react';
 // import '../css/ListElement.css';
 
-const ListElement = () => (
-    <li>123</li>
+const ListElement = (props) => (
+    <li>{props.title}</li>
 );
 
 export default ListElement;
