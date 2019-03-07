@@ -1,9 +1,9 @@
 import React from 'react';
-import LoginForm from './LoginForm';
+import './LoginPage.css';
 
 class LoginPage extends React.Component {
 
-    ViewError = async (e) => {
+    ViewError = (e) => {
         e.preventDefault();
 
         const login = e.target.elements.login.value;
@@ -19,7 +19,22 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <LoginForm check={this.ViewError} />
+            <div id='body'>
+                <div>
+                    <p id='title'>Login Page</p>
+                    <form id='LandP' onSubmit={this.ViewError}>
+                        <p>Name</p>
+                        <input type="text" name='login' placeholder="Name" id="login" required />
+                        <p>Password</p>
+                        <input type="password" name='password' placeholder="Password" id="password" required />
+                        <br />
+                        <button type='submit' id="SignIn">SignIn</button>
+                    </form>
+                    <div id='err'>
+                        <p>Incorrect login or password</p>
+                    </div>
+                </div>
+            </div>
         );
     };
 };
