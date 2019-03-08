@@ -15,4 +15,4 @@ const HeadSite = (props) => (
     </header>
 );
 
-export default HeadSite;
+export default HeadPage;
