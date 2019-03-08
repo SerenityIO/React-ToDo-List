@@ -1,7 +1,7 @@
 import React from 'react';
-import '../css/MainSite.css';
-import HeadSite from './HeadSite';
-import ListSite from './ListSite';
+import './MainPage.css';
+import HeadPage from './components/HeadPage';
+import List from './components/List';
 
 class MainSite extends React.Component {
     constructor(props) {
@@ -34,8 +34,8 @@ class MainSite extends React.Component {
     render() {
         return (
             <main>
-                <HeadSite handleSubmit={this.handleAddItem} />
-                <ListSite />
+                <HeadPage handleSubmit={this.handleAddItem} />
+                <List />
                 <input value={this.state.title} onChange={this.handleChange} />
             </main>
         );

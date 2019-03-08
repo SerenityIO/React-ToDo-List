@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/HeadSite.css';
+import '../css/HeadPage.css';
 
 const HeadSite = (props) => (
     <header>
