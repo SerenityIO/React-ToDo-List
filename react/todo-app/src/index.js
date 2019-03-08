@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { render } from 'react-dom';
 import LoginPage from './App/LoginPage/LoginPage';
-import MainSite from './App/MainPage/js/MainSite';
+import MainPage from './App/MainPage/MainPage';
 
 class App extends React.Component {
     render() {
@@ -11,7 +11,7 @@ class App extends React.Component {
                 <React.Fragment>
                     <Route path="/" exact component={LoginPage} />
                     <Route path="/login" exact component={LoginPage} />
-                    <Route path="/list" component={MainSite} />
+                    <Route path="/list" component={MainPage} />
                 </React.Fragment>  
             </Router>
         );
