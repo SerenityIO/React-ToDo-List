@@ -177,7 +177,6 @@ class MainPage extends React.Component {
                 </header>
                 <ul id='list'>
                     {this.state.MyList.map((val) =>
-
                         <li id={val.id}>{val.name}
                             <input type="checkbox" className="check" onClick={() => {
                                 var li = document.getElementsByTagName('li');
@@ -203,16 +202,15 @@ class MainPage extends React.Component {
                                     var li = document.getElementsByTagName('li');
                                     var done = document.getElementsByClassName('Done');
                                     ListArray[val.id].done = !ListArray[val.id].done;
-                                    li[val.id].className = (ListArray[val.id]) ? 'green' : '';
 
                                     if (ListArray[val.id].done) {
                                         done.innerText = 'Undone';
                                         done.className = 'Undone';
-                                        
+                                        li[val.id].className = 'green';
                                     } else {
                                         done.innerText = 'Done';
                                         done.className = 'Done';
-
+                                        li[val.id].className = '';
                                     }
                                     this.setState({
                                         MyList: ListArray
