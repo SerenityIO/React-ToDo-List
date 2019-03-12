@@ -81,8 +81,28 @@ class MainPage extends React.Component {
                             }}></div>
                             <div className="DoneEditCopy">
                                 <button type="submit" className="Done">Done</button>
-                                <button type="submit" className="Edit">Edit</button>
-                                <button type="submit" className="Copy">Copy</button>
+                                <button type="submit" className="Edit" onClick={() => {
+                                    let ListArray = this.state.MyList;
+
+                                    var newName = prompt('Write new name this row');
+                                    if (newName != 0) {
+                                        ListArray[val.id].name = newName;
+                                    }
+                                    this.setState({
+                                        MyList: ListArray
+                                    });
+                                }}>Edit</button>
+                                <button type="submit" className="Copy" onClick={() => {
+                                    let ListArray = this.state.MyList;
+                                    ListArray.push({
+                                        id: ListArray.length,
+                                        name: ListArray[val.id].name,
+                                        done: ListArray[val.id].done
+                                    });
+                                    this.setState({
+                                        MyList: ListArray
+                                    });
+                                }}>Copy</button>
                             </div>
                         </li>
                     )}
