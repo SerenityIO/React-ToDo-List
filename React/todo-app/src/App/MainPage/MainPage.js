@@ -200,23 +200,23 @@ class MainPage extends React.Component {
                             <div className="DoneEditCopy">
                                 <button type="submit" className="Done" onClick={() => {
                                     let ListArray = this.state.MyList;
-
+                                    var li = document.getElementsByTagName('li');
+                                    var done = document.getElementsByClassName('Done');
                                     ListArray[val.id].done = !ListArray[val.id].done;
+                                    li[val.id].className = (ListArray[val.id]) ? 'green' : '';
 
                                     if (ListArray[val.id].done) {
                                         done.innerText = 'Undone';
                                         done.className = 'Undone';
-                                        li.style.backgroundColor = "rgb(193, 255, 193)";
-                                        li.style.borderTop = "1px solid rgb(0, 255, 13)";
-                                        li.style.borderBottom = "1px solid rgb(0, 255, 13)";
-                                        li.style.height = "30px";
+                                        
                                     } else {
                                         done.innerText = 'Done';
                                         done.className = 'Done';
-                                        li.style.backgroundColor = "";
-                                        li.style.border = "";
-                                        li.style.height = "";
+
                                     }
+                                    this.setState({
+                                        MyList: ListArray
+                                    });
                                 }}>Done</button>
                                 <button type="submit" className="Edit" onClick={() => {
                                     let ListArray = this.state.MyList;
