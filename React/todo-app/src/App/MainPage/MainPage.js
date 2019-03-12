@@ -21,17 +21,8 @@ class MainPage extends React.Component {
 
     handleAddItem = (e) => {
         e.preventDefault();
+        let ListArray = this.state.MyList;
 
-        let ListArray;
-        ListArray = this.state.MyList;
-
-        // var arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('ListArray'));
-
-        // if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
-        //     ListArray = arrayFromlocalStorage;
-        // }
-        // else {
-        // }
         ListArray.push({
             id: ListArray.length,
             name: e.target[0].value,
@@ -42,7 +33,7 @@ class MainPage extends React.Component {
         this.setState({
             MyList: ListArray
         });
-        };
+    };
 
     handleRemoveItem = (id) => {
         let ListArray = this.state.MyList;
@@ -79,18 +70,60 @@ class MainPage extends React.Component {
         this.setState({
             MyList: ListArray
         });
-    }
+    };
 
-    windowonunload = () => {
+    handleCheck = (id) => {
+        var li = document.getElementsByTagName('li');
+        var box = document.getElementsByClassName('check');
+
+        li[id].className = (box[id].checked) ? 'red' : '';
+    };
+
+    handleRemoveCheckItem = (id) => {
         let ListArray = this.state.MyList;
+        var box = document.getElementsByClassName('check');
+        var MainCheck = document.getElementById('all');
+        var li = document.getElementsByTagName('li');
 
-        window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
-    }
+        ListArray = ListArray.filter(function (value, index) {
+            return !box[index].checked;
+        });
+        for (var i = 0; i < ListArray.length; i++) {
+            ListArray[i].id = i;
+            box[i].checked = false;
+            li[i].className = (box[i].checked) ? 'red' : '';
+        }
+        MainCheck.checked = false;
+        this.setState({
+            MyList: ListArray
+        });
+    };
+
+    handleCheckAllItem = () => {
+        var check = document.getElementsByClassName('check');
+        var all = document.getElementById('all');
+
+        if (all.checked) {
+            for (var i = 0; i < check.length; i++) {
+                var per = check[i].parentNode;
+
+                check[i].checked = true;
+                per.className = 'red';
+            }
+        } else {
+            for (var i = 0; i < check.length; i++) {
+                var per = check[i].parentNode;
+
+                check[i].checked = false;
+                per.className = '';
+            }
+        }
+    };
 
     render() {
         let ListArray = this.state.MyList;
         window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
-        
+
         return (
             <main>
                 <header>
@@ -100,15 +133,58 @@ class MainPage extends React.Component {
                         <button type='submit'>Add</button>
                     </form>
                     <menu>
-                        {/* <input type="checkbox" name="all" id="all" onclick={checkAll} />
-            <button type="submit" onclick={removeCheck} id="deleteAll">Remove</button> */}
+                        <input type="checkbox" name="all" id="all" onClick={() => {
+                            var check = document.getElementsByClassName('check');
+                            var all = document.getElementById('all');
+
+                            if (all.checked) {
+                                for (var i = 0; i < check.length; i++) {
+                                    var per = check[i].parentNode;
+
+                                    check[i].checked = true;
+                                    per.className = 'red';
+                                }
+                            } else {
+                                for (var i = 0; i < check.length; i++) {
+                                    var per = check[i].parentNode;
+
+                                    check[i].checked = false;
+                                    per.className = '';
+                                }
+                            }
+                        }} />
+                        <button type="submit" onClick={() => {
+                            let ListArray = this.state.MyList;
+                            var box = document.getElementsByClassName('check');
+                            var MainCheck = document.getElementById('all');
+                            var li = document.getElementsByTagName('li');
+
+                            ListArray = ListArray.filter(function (value, index) {
+                                return !box[index].checked;
+                            });
+                            for (var i = 0; i < ListArray.length; i++) {
+                                ListArray[i].id = i;
+                                box[i].checked = false;
+                                li[i].className = (box[i].checked) ? 'red' : '';
+                            }
+                            MainCheck.checked = false;
+                            this.setState({
+                                MyList: ListArray
+                            });
+                        }
+                        } id="deleteAll">Remove</button>
                     </menu>
                 </header>
                 <ul id='list'>
                     {this.state.MyList.map((val) =>
 
                         <li id={val.id}>{val.name}
-                            <input type="checkbox" className="check" />
+                            <input type="checkbox" className="check" onClick={() => {
+                                var li = document.getElementsByTagName('li');
+                                var box = document.getElementsByClassName('check');
+
+                                li[val.id].className = (box[val.id].checked) ? 'red' : '';
+                            }} />
                             <div className="button" onClick={() => {
                                 let ListArray = this.state.MyList;
                                 ListArray = ListArray.filter(function (value, index) {
