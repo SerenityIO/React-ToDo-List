@@ -167,7 +167,15 @@ menu input {
     border-bottom: 1px solid red;
     border-top: 1px solid red;
     height: 30px;
-    ;
+}
+
+#list li.green {
+    transition: all.3s ease;
+    background-color: rgb(193, 255, 193);
+    color: rgb(0, 83, 4);
+    border-bottom: 1px solid rgb(0, 255, 13);
+    border-top: 1px solid rgb(0, 255, 13);
+    height: 30px;
 }
 
 .red div {
