@@ -7,7 +7,7 @@ class MainPage extends React.Component {
         super(props);
 
         this.state = {
-            list: []
+            MyList: []
         };
     }
 
@@ -15,67 +15,38 @@ class MainPage extends React.Component {
         e.preventDefault();
 
         this.setState({
-            list: [
-                ...this.state.list,
-                {
-                    name: e.target[0].value,
-                    done: true
-                }
+            MyList: [
+                ...this.state.MyList
             ]
         });
-        var ul = document.getElementById('list');
 
-        var li = document.createElement('li');
-        var check = document.createElement('input');
-        var div = document.createElement('div');
-        var but = document.createElement('div');
-        var done = document.createElement('button');
-        var edit = document.createElement('button');
-        var copy = document.createElement('button');
+        let ListArray = this.state.MyList;
 
-        done.type = 'submit';
-
-        // if (array.done) {
-        //     done.innerText = 'Undone';
-        //     done.className = 'Undone';
-        //     li.style.backgroundColor = "rgb(193, 255, 193)";
-        //     li.style.borderTop = "1px solid rgb(0, 255, 13)";
-        //     li.style.borderBottom = "1px solid rgb(0, 255, 13)";
-        //     li.style.height = "30px";
-        // } else {
-        //     done.innerText = 'Done';
-        //     done.className = 'Done';
-        //     li.style.backgroundColor = "";
-        //     li.style.border = "";
-        //     li.style.height = "";
-        // }
-
-        edit.type = 'submit';
-        edit.innerText = 'Edit';
-        edit.className = 'Edit';
-
-        copy.type = 'submit';
-        copy.innerText = 'Copy';
-        copy.className = 'Copy';
-
-
-        li.innerText = e.target[0].value;
-
-        but.className = "DoneEditCopy";
-        but.appendChild(done);
-        but.appendChild(edit);
-        but.appendChild(copy);
-        check.type = "checkbox";
-        check.className = "check";
-
-        div.className = "button";
-        li.appendChild(check);
-        li.appendChild(div);
-        li.appendChild(but);
-        ul.appendChild(li);
+        ListArray.push({
+            id: ListArray.length,
+            name: e.target[0].value,
+            done: false
+        });
 
         e.target.reset();
+        this.setState({
+            MyList: ListArray
+        });
     };
+
+    handleRemoveItem = (id) => {
+        let ListArray = this.state.MyList;
+        ListArray = ListArray.filter(function (value, index) {
+            return id !== index;
+        });
+        for (var i = 0; i < ListArray.length; i++) {
+            ListArray[i].id = i;
+        }
+        this.setState({
+            MyList: ListArray
+        });
+    };
+
 
     render() {
         return (
@@ -92,7 +63,29 @@ class MainPage extends React.Component {
                     </menu>
                 </header>
                 <ul id='list'>
-                    {/* <ListElement /> */}
+                    {this.state.MyList.map((val) =>
+
+                        <li id={val.id}>{val.name}
+                            <input type="checkbox" className="check" />
+                            <div className="button" onClick={() => {
+                                let ListArray = this.state.MyList;
+                                ListArray = ListArray.filter(function (value, index) {
+                                    return val.id !== index;
+                                });
+                                for (var i = 0; i < ListArray.length; i++) {
+                                    ListArray[i].id = i;
+                                }
+                                this.setState({
+                                    MyList: ListArray
+                                });
+                            }}></div>
+                            <div className="DoneEditCopy">
+                                <button type="submit" className="Done">Done</button>
+                                <button type="submit" className="Edit">Edit</button>
+                                <button type="submit" className="Copy">Copy</button>
+                            </div>
+                        </li>
+                    )}
                 </ul>
             </main>
         );
