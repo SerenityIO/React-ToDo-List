@@ -6,22 +6,32 @@ class MainPage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            MyList: []
-        };
-    }
+        let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('ListArray'));
+
+        if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
+            this.state = {
+                MyList: arrayFromlocalStorage
+            };
+        } else {
+            this.state = {
+                MyList: []
+            };
+        }
+    };
 
     handleAddItem = (e) => {
         e.preventDefault();
 
-        this.setState({
-            MyList: [
-                ...this.state.MyList
-            ]
-        });
+        let ListArray;
+        ListArray = this.state.MyList;
 
-        let ListArray = this.state.MyList;
+        // var arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('ListArray'));
 
+        // if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
+        //     ListArray = arrayFromlocalStorage;
+        // }
+        // else {
+        // }
         ListArray.push({
             id: ListArray.length,
             name: e.target[0].value,
@@ -32,7 +42,7 @@ class MainPage extends React.Component {
         this.setState({
             MyList: ListArray
         });
-    };
+        };
 
     handleRemoveItem = (id) => {
         let ListArray = this.state.MyList;
@@ -47,8 +57,40 @@ class MainPage extends React.Component {
         });
     };
 
+    handleEditElement = (id) => {
+        let ListArray = this.state.MyList;
+        var newName = prompt('Write new name this row');
+
+        if (newName !== 0) {
+            ListArray[id].name = newName;
+        }
+        this.setState({
+            MyList: ListArray
+        });
+    };
+
+    handleCopyElement = (id) => {
+        let ListArray = this.state.MyList;
+        ListArray.push({
+            id: ListArray.length,
+            name: ListArray[id].name,
+            done: ListArray[id].done
+        });
+        this.setState({
+            MyList: ListArray
+        });
+    }
+
+    windowonunload = () => {
+        let ListArray = this.state.MyList;
+
+        window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
+    }
 
     render() {
+        let ListArray = this.state.MyList;
+        window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
+        
         return (
             <main>
                 <header>
@@ -85,7 +127,7 @@ class MainPage extends React.Component {
                                     let ListArray = this.state.MyList;
 
                                     var newName = prompt('Write new name this row');
-                                    if (newName != 0) {
+                                    if (newName !== 0) {
                                         ListArray[val.id].name = newName;
                                     }
                                     this.setState({
