@@ -162,10 +162,8 @@ menu input {
 
 #list li.red {
     transition: all.3s ease;
-    background-color: rgb(245, 170, 170);
     color: rgb(255, 0, 0);
-    border-bottom: 1px solid red;
-    border-top: 1px solid red;
+    border: 1px solid red;
     height: 30px;
 }
 

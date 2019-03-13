@@ -26,7 +26,8 @@ class MainPage extends React.Component {
         ListArray.push({
             id: ListArray.length,
             name: e.target[0].value,
-            done: false
+            done: false,
+            checked: false
         });
 
         e.target.reset();
@@ -36,16 +37,13 @@ class MainPage extends React.Component {
     };
 
     handleRemoveItem = (id) => {
-        let ListArray = this.state.MyList;
-        ListArray = ListArray.filter(function (value, index) {
-            return id !== index;
-        });
-        for (var i = 0; i < ListArray.length; i++) {
-            ListArray[i].id = i;
-        }
+        const ListArray = [...this.state.MyList];
         this.setState({
-            MyList: ListArray
+            MyList: ListArray.filter((value, index) => {
+                return id !== index;
+            })
         });
+        
     };
 
     handleEditElement = (id) => {
@@ -65,7 +63,8 @@ class MainPage extends React.Component {
         ListArray.push({
             id: ListArray.length,
             name: ListArray[id].name,
-            done: ListArray[id].done
+            done: ListArray[id].done,
+            checked: ListArray[id].checked
         });
         this.setState({
             MyList: ListArray
@@ -73,57 +72,53 @@ class MainPage extends React.Component {
     };
 
     handleCheck = (id) => {
-        var li = document.getElementsByTagName('li');
-        var box = document.getElementsByClassName('check');
+        const ListArray = [...this.state.MyList];
 
-        li[id].className = (box[id].checked) ? 'red' : '';
+        ListArray[id].checked = !ListArray[id].checked;
+        this.setState({
+            MyList: [...ListArray]
+        });
     };
 
-    handleRemoveCheckItem = (id) => {
-        let ListArray = this.state.MyList;
-        var box = document.getElementsByClassName('check');
-        var MainCheck = document.getElementById('all');
-        var li = document.getElementsByTagName('li');
-
-        ListArray = ListArray.filter(function (value, index) {
-            return !box[index].checked;
-        });
-        for (var i = 0; i < ListArray.length; i++) {
-            ListArray[i].id = i;
-            box[i].checked = false;
-            li[i].className = (box[i].checked) ? 'red' : '';
-        }
-        MainCheck.checked = false;
+    handleRemoveCheckItem = () => {
+        const ListArray = [...this.state.MyList];
         this.setState({
-            MyList: ListArray
+            MyList: ListArray.filter((value) => {
+                return !value.checked;
+            })
         });
     };
 
     handleCheckAllItem = () => {
-        var check = document.getElementsByClassName('check');
+        const ListArray = [...this.state.MyList];
         var all = document.getElementById('all');
 
         if (all.checked) {
-            for (var i = 0; i < check.length; i++) {
-                var per = check[i].parentNode;
-
-                check[i].checked = true;
-                per.className = 'red';
+            for (var i = 0; i < ListArray.length; i++) {
+                ListArray[i].checked = true;
             }
         } else {
-            for (var i = 0; i < check.length; i++) {
-                var per = check[i].parentNode;
-
-                check[i].checked = false;
-                per.className = '';
+            for (var i = 0; i < ListArray.length; i++) {
+                ListArray[i].checked = false;
             }
         }
+        this.setState({
+            MyList: ListArray
+        });
     };
+    handleDone = (id) => {
+        const ListArray = [...this.state.MyList];
+        ListArray[id].done = !ListArray[id].done;
+        this.setState({
+            MyList: [...ListArray]
+        });
+
+    }
 
     render() {
         let ListArray = this.state.MyList;
         window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
-
+        
         return (
             <main>
                 <header>
@@ -133,119 +128,29 @@ class MainPage extends React.Component {
                         <button type='submit'>Add</button>
                     </form>
                     <menu>
-                        <input type="checkbox" name="all" id="all" onClick={() => {
-                            var check = document.getElementsByClassName('check');
-                            var all = document.getElementById('all');
-
-                            if (all.checked) {
-                                for (var i = 0; i < check.length; i++) {
-                                    var per = check[i].parentNode;
-
-                                    check[i].checked = true;
-                                    per.className = 'red';
-                                }
-                            } else {
-                                for (var i = 0; i < check.length; i++) {
-                                    var per = check[i].parentNode;
-
-                                    check[i].checked = false;
-                                    per.className = '';
-                                }
-                            }
-                        }} />
-                        <button type="submit" onClick={() => {
-                            let ListArray = this.state.MyList;
-                            var box = document.getElementsByClassName('check');
-                            var MainCheck = document.getElementById('all');
-                            var li = document.getElementsByTagName('li');
-
-                            ListArray = ListArray.filter(function (value, index) {
-                                return !box[index].checked;
-                            });
-                            for (var i = 0; i < ListArray.length; i++) {
-                                ListArray[i].id = i;
-                                box[i].checked = false;
-                                li[i].className = (box[i].checked) ? 'red' : '';
-                            }
-                            MainCheck.checked = false;
-                            this.setState({
-                                MyList: ListArray
-                            });
-                        }
-                        } id="deleteAll">Remove</button>
+                        <input type="checkbox" name="all" id="all" onClick={this.handleCheckAllItem} />
+                        <button type="submit" onClick={this.handleRemoveCheckItem} id="deleteAll">Remove</button>
                     </menu>
                 </header>
                 <ul id='list'>
-                    {this.state.MyList.map((val) =>
-                        <li id={val.id}>{val.name}
-                            <input type="checkbox" className="check" onClick={() => {
-                                var li = document.getElementsByTagName('li');
-                                var box = document.getElementsByClassName('check');
-
-                                li[val.id].className = (box[val.id].checked) ? 'red' : '';
-                            }} />
-                            <div className="button" onClick={() => {
-                                let ListArray = this.state.MyList;
-                                ListArray = ListArray.filter(function (value, index) {
-                                    return val.id !== index;
-                                });
-                                for (var i = 0; i < ListArray.length; i++) {
-                                    ListArray[i].id = i;
-                                }
-                                this.setState({
-                                    MyList: ListArray
-                                });
-                            }}></div>
+                    {this.state.MyList.map((val) => (
+                    <li id={val.id} className={val.checked ? 'red' : ''}>{val.name}
+                            <input type="checkbox" checked={val.checked} className="check" onClick={() => this.handleCheck(val.id)} />
+                            <div className="button" onClick={() => this.handleRemoveItem(val.id)}></div>
                             <div className="DoneEditCopy">
-                                <button type="submit" className="Done" onClick={() => {
-                                    let ListArray = this.state.MyList;
-                                    var li = document.getElementsByTagName('li');
-                                    var done = document.getElementsByClassName('Done');
-                                    ListArray[val.id].done = !ListArray[val.id].done;
 
-                                    if (ListArray[val.id].done) {
-                                        done.innerText = 'Undone';
-                                        done.className = 'Undone';
-                                        li[val.id].className = 'green';
-                                    } else {
-                                        done.innerText = 'Done';
-                                        done.className = 'Done';
-                                        li[val.id].className = '';
-                                    }
-                                    this.setState({
-                                        MyList: ListArray
-                                    });
-                                }}>Done</button>
-                                <button type="submit" className="Edit" onClick={() => {
-                                    let ListArray = this.state.MyList;
+                                <button type="submit" className={val.done ? "Undone" : "Done"} onClick={() => this.handleDone(val.id)}>{val.done ? "Undone" : "Done"}</button>
 
-                                    var newName = prompt('Write new name this row');
-                                    if (newName !== 0) {
-                                        ListArray[val.id].name = newName;
-                                    }
-                                    this.setState({
-                                        MyList: ListArray
-                                    });
-                                }}>Edit</button>
-                                <button type="submit" className="Copy" onClick={() => {
-                                    let ListArray = this.state.MyList;
-                                    ListArray.push({
-                                        id: ListArray.length,
-                                        name: ListArray[val.id].name,
-                                        done: ListArray[val.id].done
-                                    });
-                                    this.setState({
-                                        MyList: ListArray
-                                    });
-                                }}>Copy</button>
+                                <button type="submit" className="Edit" onClick={() => this.handleEditElement(val.id)}>Edit</button>
+                                <button type="submit" className="Copy" onClick={() => this.handleCopyElement(val.id)}>Copy</button>
                             </div>
                         </li>
-                    )}
+                    ))}
                 </ul>
             </main>
-        );
+        )
     };
-
 };
 
 export default withRouter(MainPage);
+
