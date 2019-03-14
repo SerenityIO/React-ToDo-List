@@ -8,31 +8,39 @@ class MainPage extends React.Component {
 
         let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('ListArray'));
 
+
         if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
             this.state = {
-                MyList: arrayFromlocalStorage
+                MyList: arrayFromlocalStorage,
             };
         } else {
             this.state = {
-                MyList: []
+                MyList: [],
             };
         }
     };
 
     handleAddItem = (e) => {
         e.preventDefault();
-        let ListArray = this.state.MyList;
+        const ListArray = this.state.MyList;
+        if (ListArray.length === 0) {
+            let i = 0;
+            window.localStorage.setItem('ID', JSON.stringify(i));
+        };
 
+        let ID = JSON.parse(window.localStorage.getItem('ID'));
         ListArray.push({
-            id: ListArray.length,
+            id: ID,
             name: e.target[0].value,
             done: false,
             checked: false
         });
-
+        ID++;
+        window.localStorage.setItem('ID', JSON.stringify(ID));
         e.target.reset();
         this.setState({
-            MyList: ListArray
+            MyList: ListArray,
+            individualId: ID
         });
     };
 
@@ -66,18 +74,23 @@ class MainPage extends React.Component {
 
     handleCopyElement = (id) => {
         const ListArray = this.state.MyList;
+        let ID = JSON.parse(window.localStorage.getItem('ID'));
+
         const index = ListArray.findIndex((value) => {
             return value.id === id;
         });
-        
+
         ListArray.push({
-            id: ListArray.length,
+            id: ID,
             name: ListArray[index].name,
             done: ListArray[index].done,
             checked: ListArray[index].checked
         });
+        ID++;
+        window.localStorage.setItem('ID', JSON.stringify(ID));
         this.setState({
-            MyList: ListArray
+            MyList: ListArray,
+            individualId: ID
         });
     };
 
@@ -138,20 +151,23 @@ class MainPage extends React.Component {
 
     getLiClassName = (done, checked) => {
         let className = '';
-        if (done) {
-            className += ' green';
-        } 
-        if (checked){
+        if (checked) {
             className += ' red';
         }
+        if (done) {
+            className += ' green';
+        }
+
         return className;
     }
 
     render() {
         let ListArray = this.state.MyList;
+
         window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
 
-        if(!JSON.parse(window.localStorage.getItem('User'))){
+
+        if (!JSON.parse(window.localStorage.getItem('User'))) {
             this.props.history.push('/login');
         }
 
