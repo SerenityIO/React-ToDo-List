@@ -6,7 +6,7 @@ class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
 
-        let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('DataBase'));
+        const arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('DataBase'));
         if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
             this.state = {
                 DataBase: arrayFromlocalStorage
@@ -31,14 +31,14 @@ class RegisterPage extends React.Component {
 
         if (FormPassword === FormPassword2) {
             document.getElementById("err").style.display = "none";
-            let DataBase = this.state.DataBase;
-            DataBase.push(
-                {
-                    id: DataBase.length,
-                    login: FormLogin,
-                    password: FormPassword
-                }
-            )
+            const { DataBase } = this.state;
+
+            DataBase.push({
+                id: DataBase.length,
+                login: FormLogin,
+                password: FormPassword
+            })
+
             window.localStorage.setItem('DataBase', JSON.stringify(DataBase));
             this.props.history.push('/login');
         } else {
@@ -47,6 +47,8 @@ class RegisterPage extends React.Component {
     };
 
     render() {
+        window.localStorage.removeItem("User");
+
         return (
             <div id='body'>
                 <div>

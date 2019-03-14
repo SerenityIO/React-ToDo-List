@@ -38,9 +38,12 @@ class MainPage extends React.Component {
 
     handleRemoveItem = (id) => {
         const ListArray = [...this.state.MyList];
+        const item = ListArray.find((value) => {
+            return value.id === id;
+        })
         this.setState({
-            MyList: ListArray.filter((value, index) => {
-                return id !== index;
+            MyList: ListArray.filter((value) => {
+                return item.id !== value.id;
             })
         });
 
@@ -49,9 +52,12 @@ class MainPage extends React.Component {
     handleEditElement = (id) => {
         let ListArray = this.state.MyList;
         var newName = prompt('Write new name this row');
+        const index = ListArray.findIndex((value) => {
+            return value.id === id;
+        });
 
         if (newName !== 0) {
-            ListArray[id].name = newName;
+            ListArray[index].name = newName;
         }
         this.setState({
             MyList: ListArray
@@ -59,12 +65,16 @@ class MainPage extends React.Component {
     };
 
     handleCopyElement = (id) => {
-        let ListArray = this.state.MyList;
+        const ListArray = this.state.MyList;
+        const index = ListArray.findIndex((value) => {
+            return value.id === id;
+        });
+        
         ListArray.push({
             id: ListArray.length,
-            name: ListArray[id].name,
-            done: ListArray[id].done,
-            checked: ListArray[id].checked
+            name: ListArray[index].name,
+            done: ListArray[index].done,
+            checked: ListArray[index].checked
         });
         this.setState({
             MyList: ListArray
@@ -73,8 +83,10 @@ class MainPage extends React.Component {
 
     handleCheck = (id) => {
         const ListArray = [...this.state.MyList];
-
-        ListArray[id].checked = !ListArray[id].checked;
+        const index = ListArray.findIndex((value) => {
+            return value.id === id;
+        });
+        ListArray[index].checked = !ListArray[index].checked;
         this.setState({
             MyList: [...ListArray]
         });
@@ -94,11 +106,11 @@ class MainPage extends React.Component {
         var all = document.getElementById('all');
 
         if (all.checked) {
-            for (var i = 0; i < ListArray.length; i++) {
+            for (let i = 0; i < ListArray.length; i++) {
                 ListArray[i].checked = true;
             }
         } else {
-            for (var i = 0; i < ListArray.length; i++) {
+            for (let i = 0; i < ListArray.length; i++) {
                 ListArray[i].checked = false;
             }
         }
@@ -109,7 +121,11 @@ class MainPage extends React.Component {
 
     handleDone = (id) => {
         const ListArray = [...this.state.MyList];
-        ListArray[id].done = !ListArray[id].done;
+
+        const index = ListArray.findIndex((value) => {
+            return value.id === id;
+        });
+        ListArray[index].done = !ListArray[index].done;
         this.setState({
             MyList: [...ListArray]
         });
@@ -120,16 +136,31 @@ class MainPage extends React.Component {
         this.props.history.push('/login');
     };
 
+    getLiClassName = (done, checked) => {
+        let className = '';
+        if (done) {
+            className += ' green';
+        } 
+        if (checked){
+            className += ' red';
+        }
+        return className;
+    }
+
     render() {
         let ListArray = this.state.MyList;
         window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
+
+        if(!JSON.parse(window.localStorage.getItem('User'))){
+            this.props.history.push('/login');
+        }
 
         return (
             <main>
                 <header>
                     <div id='head'>
                         <h3 id='titleToDo'>My ToDo-List</h3>
-                        <h3 id='welcome'>Welcome, { JSON.parse(window.localStorage.getItem('User'))}</h3>
+                        <h3 id='welcome'>Welcome, <ins><b>{JSON.parse(window.localStorage.getItem('User'))}</b></ins></h3>
                         <div id='exit' onClick={this.clickExit}></div>
                     </div>
                     <form onSubmit={this.handleAddItem}>
@@ -137,19 +168,17 @@ class MainPage extends React.Component {
                         <button type='submit'>Add</button>
                     </form>
                     <menu>
-                        <input type="checkbox" name="all" id="all" onClick={this.handleCheckAllItem} />
+                        <input type="checkbox" name="all" id="all" onChange={this.handleCheckAllItem} />
                         <button type="submit" onClick={this.handleRemoveCheckItem} id="deleteAll">Remove</button>
                     </menu>
                 </header>
                 <ul id='list'>
                     {this.state.MyList.map((val) => (
-                        <li id={val.id} className={val.checked ? 'red' : ''}>{val.name}
-                            <input type="checkbox" checked={val.checked} className="check" onClick={() => this.handleCheck(val.id)} />
+                        <li id={val.id} key={val.id + 'item'} className={this.getLiClassName(val.done, val.checked)}>{val.name}
+                            <input type="checkbox" checked={val.checked} className="check" onChange={() => this.handleCheck(val.id)} />
                             <div className="button" onClick={() => this.handleRemoveItem(val.id)}></div>
                             <div className="DoneEditCopy">
-
                                 <button type="submit" className={val.done ? "Undone" : "Done"} onClick={() => this.handleDone(val.id)}>{val.done ? "Undone" : "Done"}</button>
-
                                 <button type="submit" className="Edit" onClick={() => this.handleEditElement(val.id)}>Edit</button>
                                 <button type="submit" className="Copy" onClick={() => this.handleCopyElement(val.id)}>Copy</button>
                             </div>
