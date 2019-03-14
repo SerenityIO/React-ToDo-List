@@ -6,7 +6,7 @@ class LoginPage extends React.Component {
     constructor(props) {
         super(props);
 
-        let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('DataBase'));
+        const arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('DataBase'));
 
         if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
             this.state = {
@@ -27,21 +27,16 @@ class LoginPage extends React.Component {
         e.preventDefault();
         const FormLogin = e.target.elements.login.value;
         const password = e.target.elements.password.value;
-        var t = 0;
-        let DataBase = this.state.DataBase;
-        for (var i = 0; i < DataBase.length; i++) {
+        const DataBase = this.state.DataBase;
+
+        for (let i = 0; i < DataBase.length; i++) {
             if (DataBase[i].login === FormLogin && DataBase[i].password === password) {
-                t++;
-                break;
+                document.getElementById("err").style.display = "none";
+                window.localStorage.setItem('User', JSON.stringify(FormLogin));
+                this.props.history.push('/list');
+            } else {
+                document.getElementById("err").style.display = "block";
             }
-        }
-        if (t === 1) {
-            document.getElementById("err").style.display = "none";
-            window.localStorage.setItem('User', JSON.stringify(FormLogin));
-            debugger
-            this.props.history.push('/list');
-        } else {
-            document.getElementById("err").style.display = "block";
         }
     };
 
@@ -50,6 +45,8 @@ class LoginPage extends React.Component {
     };
 
     render() {
+        window.localStorage.removeItem("User");
+
         return (
             <div id='body'>
                 <div>

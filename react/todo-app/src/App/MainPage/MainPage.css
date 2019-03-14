@@ -24,6 +24,7 @@ header {
 }
 
 #exit {
+    transition: all.3s ease;
     height: 24px;
     width: 24px;
     background-image: url(image/exit.svg);
@@ -31,6 +32,7 @@ header {
 }
 
 #exit:hover {
+    transition: all.3s ease;
     height: 24px;
     width: 24px;
     background-image: url(image/exit-active.svg);
@@ -38,7 +40,7 @@ header {
 }
 #welcome {
     width: 25%;
-    color: rgb(183, 218, 250);
+    color: rgb(255, 255, 255);
 }
 
 #titleToDo {
@@ -200,12 +202,17 @@ menu input {
     height: 30px;
 }
 
-#list li.green {
+#list li.green:nth-child(odd) {
     transition: all.3s ease;
     background-color: rgb(193, 255, 193);
     color: rgb(0, 83, 4);
-    border-bottom: 1px solid rgb(0, 255, 13);
-    border-top: 1px solid rgb(0, 255, 13);
+    height: 30px;
+}
+
+#list li.green:nth-child(even){
+    transition: all.3s ease;
+    background-color: rgb(105, 241, 105);
+    color: rgb(0, 83, 4);
     height: 30px;
 }
 
@@ -230,6 +237,7 @@ menu input {
     background-color: rgb(230, 51, 51);
     color: rgb(0, 255, 13);
 }
+
 
 .Done {
     transition: all.3s ease;
