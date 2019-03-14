@@ -43,7 +43,7 @@ class MainPage extends React.Component {
                 return id !== index;
             })
         });
-        
+
     };
 
     handleEditElement = (id) => {
@@ -106,23 +106,32 @@ class MainPage extends React.Component {
             MyList: ListArray
         });
     };
+
     handleDone = (id) => {
         const ListArray = [...this.state.MyList];
         ListArray[id].done = !ListArray[id].done;
         this.setState({
             MyList: [...ListArray]
         });
+    };
 
-    }
+    clickExit = () => {
+        window.localStorage.removeItem("User");
+        this.props.history.push('/login');
+    };
 
     render() {
         let ListArray = this.state.MyList;
         window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
-        
+
         return (
             <main>
                 <header>
-                    <h3>My ToDo-List</h3>
+                    <div id='head'>
+                        <h3 id='titleToDo'>My ToDo-List</h3>
+                        <h3 id='welcome'>Welcome, { JSON.parse(window.localStorage.getItem('User'))}</h3>
+                        <div id='exit' onClick={this.clickExit}></div>
+                    </div>
                     <form onSubmit={this.handleAddItem}>
                         <input placeholder="Tide" required type="text" />
                         <button type='submit'>Add</button>
@@ -134,7 +143,7 @@ class MainPage extends React.Component {
                 </header>
                 <ul id='list'>
                     {this.state.MyList.map((val) => (
-                    <li id={val.id} className={val.checked ? 'red' : ''}>{val.name}
+                        <li id={val.id} className={val.checked ? 'red' : ''}>{val.name}
                             <input type="checkbox" checked={val.checked} className="check" onClick={() => this.handleCheck(val.id)} />
                             <div className="button" onClick={() => this.handleRemoveItem(val.id)}></div>
                             <div className="DoneEditCopy">

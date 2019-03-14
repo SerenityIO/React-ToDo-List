@@ -8,9 +8,42 @@
 header {
     width: 100%;
     background-color: rgb(244, 67, 54);
-    height: 90px;
+    height: 100px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#head {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+#exit {
+    height: 24px;
+    width: 24px;
+    background-image: url(image/exit.svg);
+    background-repeat: no-repeat;
+}
+
+#exit:hover {
+    height: 24px;
+    width: 24px;
+    background-image: url(image/exit-active.svg);
+    background-repeat: no-repeat;
+}
+#welcome {
+    width: 25%;
+    color: rgb(183, 218, 250);
+}
+
+#titleToDo {
+    width: 70%;
+    display: flex;
     justify-content: center;
     align-items: center;
 }

@@ -15,6 +15,7 @@ class LoginPage extends React.Component {
         } else {
             this.state = {
                 DataBase: [{
+                    id: 0,
                     login: 'admin',
                     password: 'admin'
                 }]
@@ -24,18 +25,20 @@ class LoginPage extends React.Component {
 
     ViewError = (e) => {
         e.preventDefault();
-        const login = e.target.elements.login.value;
+        const FormLogin = e.target.elements.login.value;
         const password = e.target.elements.password.value;
         var t = 0;
         let DataBase = this.state.DataBase;
         for (var i = 0; i < DataBase.length; i++) {
-            if (DataBase[i].login === login && DataBase[i].password === password) {
+            if (DataBase[i].login === FormLogin && DataBase[i].password === password) {
                 t++;
                 break;
             }
         }
         if (t === 1) {
             document.getElementById("err").style.display = "none";
+            window.localStorage.setItem('User', JSON.stringify(FormLogin));
+            debugger
             this.props.history.push('/list');
         } else {
             document.getElementById("err").style.display = "block";
@@ -43,7 +46,7 @@ class LoginPage extends React.Component {
     };
 
     click = () => {
-        this.props.history.push('/register')
+        this.props.history.push('/register');
     };
 
     render() {

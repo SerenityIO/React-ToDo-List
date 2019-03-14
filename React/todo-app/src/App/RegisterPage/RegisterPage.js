@@ -7,7 +7,6 @@ class RegisterPage extends React.Component {
         super(props);
 
         let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('DataBase'));
-
         if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
             this.state = {
                 DataBase: arrayFromlocalStorage
@@ -15,6 +14,7 @@ class RegisterPage extends React.Component {
         } else {
             this.state = {
                 DataBase: [{
+                    id: 0,
                     login: 'admin',
                     password: 'admin'
                 }]
@@ -34,6 +34,7 @@ class RegisterPage extends React.Component {
             let DataBase = this.state.DataBase;
             DataBase.push(
                 {
+                    id: DataBase.length,
                     login: FormLogin,
                     password: FormPassword
                 }
