@@ -13,6 +13,7 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-bottom: 3px solid rgb(173, 153, 153);
 }
 
 #head {
@@ -38,6 +39,7 @@ header {
     background-image: url(image/exit-active.svg);
     background-repeat: no-repeat;
 }
+
 #welcome {
     width: 25%;
     color: rgb(255, 255, 255);
@@ -209,7 +211,7 @@ menu input {
     height: 30px;
 }
 
-#list li.green:nth-child(even){
+#list li.green:nth-child(even) {
     transition: all.3s ease;
     background-color: rgb(105, 241, 105);
     color: rgb(0, 83, 4);
@@ -220,9 +222,67 @@ menu input {
     opacity: 1;
 }
 
+#author {
+    font-size: 12pt;
+    min-height: 36px;
+    min-width: 120px;
+    padding: 0px 4px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid silver;
+    background-color: rgb(255, 255, 255);
+    border-radius: 7px;
+    position: absolute;
+    margin-top: 16px;
+    right: 30px;
+    display: none;
+    z-index: 2;
+    color: black;
+    transition: all.6s ease;
+}
+
+#g {
+    color: rgb(30, 245, 30);
+}
+
+#r {
+    color: rgb(238, 28, 28);
+}
+
+#info {
+    background-image: url(image/info.svg);
+    transition: all.6s ease;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    right: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position-x: 8px;
+    background-position-y: 8px;
+}
+
+#info:hover #author {
+    transition: all.6s ease;
+    display: block;
+}
+
+#info:hover {
+    transition: all.6s ease;
+    background-size: 24px;
+    background-position-x: 4px;
+    background-position-y: 4px;
+    display: block;
+}
+
 .DoneEditCopy {
     position: absolute;
-    right: 64px;
+    right: 70px;
 }
 
 .Done, .Edit, .Copy, .Undone {
@@ -237,7 +297,6 @@ menu input {
     background-color: rgb(230, 51, 51);
     color: rgb(0, 255, 13);
 }
-
 
 .Done {
     transition: all.3s ease;

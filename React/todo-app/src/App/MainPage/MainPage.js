@@ -33,7 +33,9 @@ class MainPage extends React.Component {
             id: ID,
             name: e.target[0].value,
             done: false,
-            checked: false
+            checked: false,
+            author: JSON.parse(window.localStorage.getItem('User')),
+            edit: 'Is not edit!'
         });
         ID++;
         window.localStorage.setItem('ID', JSON.stringify(ID));
@@ -66,6 +68,7 @@ class MainPage extends React.Component {
 
         if (newName !== 0) {
             ListArray[index].name = newName;
+            ListArray[index].edit = JSON.parse(window.localStorage.getItem('User'));
         }
         this.setState({
             MyList: ListArray
@@ -84,7 +87,9 @@ class MainPage extends React.Component {
             id: ID,
             name: ListArray[index].name,
             done: ListArray[index].done,
-            checked: ListArray[index].checked
+            checked: ListArray[index].checked,
+            author: ListArray[index].author,
+            edit: 'Is not edit!'
         });
         ID++;
         window.localStorage.setItem('ID', JSON.stringify(ID));
@@ -190,13 +195,20 @@ class MainPage extends React.Component {
                 </header>
                 <ul id='list'>
                     {this.state.MyList.map((val) => (
-                        <li id={val.id} key={val.id + 'item'} className={this.getLiClassName(val.done, val.checked)}>{val.name}
+                        <li id={val.id} key={val.id + 'item'} className={this.getLiClassName(val.done, val.checked)}>
+                            <div id='name'>{val.name}</div>
                             <input type="checkbox" checked={val.checked} className="check" onChange={() => this.handleCheck(val.id)} />
                             <div className="button" onClick={() => this.handleRemoveItem(val.id)}></div>
                             <div className="DoneEditCopy">
                                 <button type="submit" className={val.done ? "Undone" : "Done"} onClick={() => this.handleDone(val.id)}>{val.done ? "Undone" : "Done"}</button>
                                 <button type="submit" className="Edit" onClick={() => this.handleEditElement(val.id)}>Edit</button>
                                 <button type="submit" className="Copy" onClick={() => this.handleCopyElement(val.id)}>Copy</button>
+                            </div>
+                            <div id='info'>
+                                <div id='author'>
+                                    <p><b>Create: </b><i id='g'>{val.author}</i></p>
+                                    <p><b>Edit: </b><i id ='r'>{val.edit}</i></p>
+                                </div>
                             </div>
                         </li>
                     ))}
