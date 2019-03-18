@@ -233,10 +233,10 @@ menu input {
     flex-direction: column;
     border: 1px solid silver;
     background-color: rgb(255, 255, 255);
-    border-radius: 7px;
+    border-radius: 7px 0px 7px 7px;
     position: absolute;
     margin-top: 16px;
-    right: 30px;
+    right: 28px;
     display: none;
     z-index: 2;
     color: black;
