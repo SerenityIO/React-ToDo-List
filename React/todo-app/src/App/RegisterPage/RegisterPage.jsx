@@ -7,6 +7,7 @@ class RegisterPage extends React.Component {
         super(props);
 
         const arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('DataBase'));
+        
         if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
             this.state = {
                 DataBase: arrayFromlocalStorage

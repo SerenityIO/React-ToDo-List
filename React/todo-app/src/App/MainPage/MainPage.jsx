@@ -10,7 +10,7 @@ class MainPage extends React.Component {
 
         let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('ListArray'));
 
-        if (arrayFromlocalStorage && arrayFromlocalStorage.length) {    
+        if (arrayFromlocalStorage && arrayFromlocalStorage.length) {
             this.state = {
                 MyList: arrayFromlocalStorage,
             };
@@ -21,10 +21,6 @@ class MainPage extends React.Component {
         }
     };
 
-    clickExit = () => {
-        window.localStorage.removeItem("User");
-        this.props.history.push('/login');
-    };
 
     handleRemoveCheckItem = () => {
         const ListArray = [...this.state.MyList];
@@ -110,7 +106,6 @@ class MainPage extends React.Component {
     handleCopyElement = (id) => {
         const ListArray = this.state.MyList;
         let ID = JSON.parse(window.localStorage.getItem('ID'));
-
         const index = ListArray.findIndex((value) => {
             return value.id === id;
         });
@@ -144,7 +139,6 @@ class MainPage extends React.Component {
 
     handleDone = (id) => {
         const ListArray = [...this.state.MyList];
-
         const index = ListArray.findIndex((value) => {
             return value.id === id;
         });
@@ -162,7 +156,6 @@ class MainPage extends React.Component {
         if (done) {
             className += ' green';
         }
-
         return className;
     }
 
@@ -177,10 +170,9 @@ class MainPage extends React.Component {
             <main>
                 <MainHeader
                     handleAddItem={this.handleAddItem}
-                    clickExit={this.clickExit}
                     handleCheckAllItem={this.handleCheckAllItem}
                     handleRemoveCheckItem={this.handleRemoveCheckItem}
-                />   
+                />
                 <MainList
                     MyList={this.state.MyList}
                     getLiClassName={this.getLiClassName}
