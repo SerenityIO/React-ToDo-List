@@ -14,7 +14,7 @@ class App extends React.Component {
                     <Route path="/login" exact component={LoginPage} />
                     <Route path="/register" component={RegisterPage} />
                     <Route path="/list" component={MainPage} />
-                </React.Fragment>  
+                </React.Fragment>
             </Router>
         );
     }
