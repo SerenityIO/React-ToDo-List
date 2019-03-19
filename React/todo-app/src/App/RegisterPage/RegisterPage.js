@@ -49,6 +49,7 @@ class RegisterPage extends React.Component {
     render() {
         window.localStorage.removeItem("User");
 
+
         return (
             <div id='body'>
                 <div>

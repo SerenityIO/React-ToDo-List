@@ -105,8 +105,6 @@ class MainList extends React.Component {
     }
 
     render() {
-        let ListArray = this.state.MyList;
-        window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
 
         return (
             <ul id='list'>
