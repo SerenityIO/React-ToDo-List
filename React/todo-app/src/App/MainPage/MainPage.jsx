@@ -64,7 +64,8 @@ class MainPage extends React.Component {
             done: false,
             checked: false,
             author: JSON.parse(window.localStorage.getItem('User')),
-            edit: 'Is not edit!'
+            LastChanges: 'Is not edit!',
+            coments: []
         });
         ID++;
         window.localStorage.setItem('ID', JSON.stringify(ID));
@@ -96,7 +97,7 @@ class MainPage extends React.Component {
 
         if (newName !== 0) {
             ListArray[index].name = newName;
-            ListArray[index].edit = JSON.parse(window.localStorage.getItem('User'));
+            ListArray[index].LastChanges = JSON.parse(window.localStorage.getItem('User'));
         }
         this.setState({
             MyList: ListArray
@@ -116,7 +117,8 @@ class MainPage extends React.Component {
             done: ListArray[index].done,
             checked: ListArray[index].checked,
             author: ListArray[index].author,
-            edit: 'Is not edit!'
+            LastChanges: 'Is not edit!',
+            coments: [].ListArray[index].coments
         });
         ID++;
         window.localStorage.setItem('ID', JSON.stringify(ID));
