@@ -98,27 +98,25 @@ class ElementComents extends React.Component {
                             LastUserName={val.LastChanges}
                         />
                         <div id='ComentBlock'>
-                            <div id='ComentBody'>
+                            <ul id='ComentList'>
                                 {this.state.Coment.map((coment) => (
-                                    <ul id='ComentList'>
-                                        <li id={coment.id} key={coment.id + 'item'}>
-                                            <pre>
-                                                {coment.name}
-                                            </pre>
-                                            <div id='InfoAndRemome'>
-                                                <div id='ComentInfo'>
-                                                    <div id='cInfo'>
-                                                        <p><b>Create: </b><i id='g'>{coment.author}</i></p>
-                                                        <p><b>Time: </b><u id='date'>{coment.time}</u></p>
-                                                    </div>
+                                    <li id={coment.id} key={coment.id + 'item'}>
+                                        <pre>
+                                            {coment.name}
+                                        </pre>
+                                        <div id='InfoAndRemome'>
+                                            <div id='ComentInfo'>
+                                                <div id='cInfo'>
+                                                    <p><b>Create: </b><i id='g'>{coment.author}</i></p>
+                                                    <p><b>Time: </b><u id='date'>{coment.time}</u></p>
                                                 </div>
-                                                <div id="RemoveComent" onClick={() => this.RemoveComent(coment.id)}></div>
                                             </div>
+                                            <div id="RemoveComent" onClick={() => this.RemoveComent(coment.id)}></div>
+                                        </div>
 
-                                        </li>
-                                    </ul>
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                             <ElementComentsAddComent
                                 AddComent={this.AddComent}
                             />
