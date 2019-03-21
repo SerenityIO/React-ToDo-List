@@ -4,6 +4,7 @@ import ElementComentsHeader from "./Components/ElementComentsHeader"
 import ElementComentsAddComent from "./Components/ElementComentsAddComent"
 import "./ElementComents.css";
 
+let nameDebounce = null;
 class ElementComents extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +15,7 @@ class ElementComents extends React.Component {
         });
         if (this.props.match.params.ElementId >= 0) {
             this.state = {
-                Element: [{
+                Element: {
                     id: arrayFromlocalStorage[index].id,
                     name: arrayFromlocalStorage[index].name,
                     done: arrayFromlocalStorage[index].done,
@@ -22,7 +23,7 @@ class ElementComents extends React.Component {
                     author: arrayFromlocalStorage[index].author,
                     LastChanges: arrayFromlocalStorage[index].LastChanges,
                     coments: []
-                }],
+                },
                 Coment: arrayFromlocalStorage[index].coments
             };
         }
@@ -35,7 +36,21 @@ class ElementComents extends React.Component {
         this.props.history.push('/list');
     };
 
-
+    handleNameChange = (event) => {
+        if (nameDebounce) {
+            clearTimeout(nameDebounce);
+        }
+        
+        const name = event.target.value
+        nameDebounce = setTimeout(() => {
+            this.setState({
+                Element: {
+                    ...this.state.Element,
+                    name
+                }
+            });
+        }, 300);
+    }
 
     AddComent = (e) => {
         e.preventDefault();
@@ -80,49 +95,52 @@ class ElementComents extends React.Component {
         const index = arrayFromlocalStorage.findIndex((value) => {
             return value.id == this.props.match.params.ElementId;
         });
+        arrayFromlocalStorage[index]  = {
+            ...this.state.Element
+        };
         arrayFromlocalStorage[index].coments = this.state.Coment;
         window.localStorage.setItem('ListArray', JSON.stringify(arrayFromlocalStorage));
     };
 
     render() {
-
-
-
         return (
             <div>
-                {this.state.Element.map((val) => (
-                    <div id='elements' key={val.id + 'item'}>
-                        <ElementComentsHeader
-                            ElementName={val.name}
-                            AuthorName={val.author}
-                            LastUserName={val.LastChanges}
-                        />
-                        <div id='ComentBlock'>
-                            <ul id='ComentList'>
-                                {this.state.Coment.map((coment) => (
-                                    <li id={coment.id} key={coment.id + 'item'}>
-                                        <pre>
-                                            {coment.name}
-                                        </pre>
-                                        <div id='InfoAndRemome'>
-                                            <div id='ComentInfo'>
-                                                <div id='cInfo'>
-                                                    <p><b>Create: </b><i id='g'>{coment.author}</i></p>
-                                                    <p><b>Time: </b><u id='date'>{coment.time}</u></p>
-                                                </div>
-                                            </div>
-                                            <div id="RemoveComent" onClick={() => this.RemoveComent(coment.id)}></div>
-                                        </div>
+                <div id='elements'>
+                    <ElementComentsHeader
+                        ElementName={this.state.Element.name}
+                        AuthorName={this.state.Element.author}
+                        LastUserName={this.state.Element.LastChanges}
+                        handleNameChange={this.handleNameChange}
 
-                                    </li>
-                                ))}
-                            </ul>
-                            <ElementComentsAddComent
-                                AddComent={this.AddComent}
-                            />
-                        </div>
+                    />
+                    <div id='ComentBlock'>
+                        <ul id='ComentList'>
+                            {this.state.Coment.map((coment) => (
+                                <li id={coment.id} key={coment.id + 'item'}>
+                                    <pre>
+                                        {coment.name}
+                                    </pre>
+                                    <div id='InfoAndRemome'>
+                                        <div id='ComentInfo'>
+                                            <div id='cInfo'>
+                                                <p>
+                                                    <b>Create: </b>
+                                                    <i id='g'>{coment.author}</i>
+                                                </p>
+                                                <p><b>Time: </b><u id='date'>{coment.time}</u></p>
+                                            </div>
+                                        </div>
+                                        <div id="RemoveComent" onClick={() => this.RemoveComent(coment.id)}></div>
+                                    </div>
+
+                                </li>
+                            ))}
+                        </ul>
+                        <ElementComentsAddComent
+                            AddComent={this.AddComent}
+                        />
                     </div>
-                ))}
+                </div>
             </div>
         )
     }
