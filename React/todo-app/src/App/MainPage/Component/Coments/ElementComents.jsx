@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 import ElementComentsHeader from "./Components/ElementComentsHeader"
+import ElementComentsAddComent from "./Components/ElementComentsAddComent"
 import "./ElementComents.css";
 
 class ElementComents extends React.Component {
@@ -20,8 +21,9 @@ class ElementComents extends React.Component {
                     checked: arrayFromlocalStorage[index].checked,
                     author: arrayFromlocalStorage[index].author,
                     LastChanges: arrayFromlocalStorage[index].LastChanges,
-                    coments: arrayFromlocalStorage[index].coments
-                }]
+                    coments: []
+                }],
+                Coment: arrayFromlocalStorage[index].coments
             };
         }
         else {
@@ -33,8 +35,63 @@ class ElementComents extends React.Component {
         this.props.history.push('/list');
     };
 
-    render() {
 
+
+    AddComent = (e) => {
+        debugger
+        e.preventDefault();
+        const ComentArray = this.state.Coment;
+
+        if (ComentArray.length === 0) {
+            let i = 0;
+            window.localStorage.setItem('Coment_ID', JSON.stringify(i));
+        };
+
+        let Coment_ID = JSON.parse(window.localStorage.getItem('Coment_ID'));
+        var l = new Date();
+        var time = l.toLocaleString()
+        ComentArray.push({
+            id: Coment_ID,
+            name: e.target[0].value,
+            author: JSON.parse(window.localStorage.getItem('User')),
+            time: time
+        });
+        Coment_ID++;
+        window.localStorage.setItem('Coment_ID', JSON.stringify(Coment_ID));
+        e.target.reset();
+        this.setState({
+            Coment: ComentArray
+        });
+        let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('ListArray'));
+        const index = arrayFromlocalStorage.findIndex((value) => {
+            return value.id == this.props.match.params.ElementId;
+        });
+        arrayFromlocalStorage[index].coments = this.state.Coment;
+        window.localStorage.setItem('ListArray', JSON.stringify(arrayFromlocalStorage));
+    };
+
+
+    RemoveComent = (id) => {
+        debugger
+        const ComentArray = this.state.Coment;
+        const item = ComentArray.find((value) => {
+            return value.id == id;
+        })
+        this.setState({
+            Coment: ComentArray.filter((value) => {
+                return item.id != value.id;
+            })
+        });
+
+        let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('ListArray'));
+        const index = arrayFromlocalStorage.findIndex((value) => {
+            return value.id == this.props.match.params.ElementId;
+        });
+        arrayFromlocalStorage[index].coments = this.state.Coment;
+        window.localStorage.setItem('ListArray', JSON.stringify(arrayFromlocalStorage));
+    };
+
+    render() {
         return (
             <div>
                 {this.state.Element.map((val) => (
@@ -44,6 +101,29 @@ class ElementComents extends React.Component {
                             AuthorName={val.author}
                             LastUserName={val.LastChanges}
                         />
+                        <div id='ComentBlock'>
+                            <div id='ComentBody'>
+                                {this.state.Coment.map((coment) => (
+                                    <ul id='ComentList'>
+                                        <li id={coment.id} key={coment.id + 'item'}>{coment.name}
+                                            <div id='InfoAndRemome'>
+                                                <div id='ComentInfo'>
+                                                    <div id='cInfo'>
+                                                        <p><b>Create: </b><i id='g'>{coment.author}</i></p>
+                                                        <p><b>Time: </b><u id='date'>{coment.time}</u></p>
+                                                    </div>
+                                                </div>
+                                                <div id="RemoveComent" onClick={() => this.RemoveComent(coment.id)}></div>
+                                            </div>
+
+                                        </li>
+                                    </ul>
+                                ))}
+                            </div>
+                            <ElementComentsAddComent
+                                AddComent={this.AddComent}
+                            />
+                        </div>
                     </div>
                 ))}
             </div>
