@@ -23,19 +23,19 @@ class LoginPage extends React.Component {
         }
     }
 
-    ViewError = (e) => {
+    viewError = (e) => {
         e.preventDefault();
-        const FormLogin = e.target.elements.login.value;
+        const formLogin = e.target.elements.login.value;
         const password = e.target.elements.password.value;
-        const DataBase = this.state.DataBase;
+        const dataBase = this.state.DataBase;
 
-        for (let i = 0; i < DataBase.length; i++) {
-            if (DataBase[i].login === FormLogin && DataBase[i].password === password) {
-                document.getElementById("err").style.display = "none";
-                window.localStorage.setItem('User', JSON.stringify(FormLogin));
+        for (let i = 0; i < dataBase.length; i++) {
+            if (dataBase[i].login === formLogin && dataBase[i].password === password) {
+                document.getElementById("error").style.display = "none";
+                window.localStorage.setItem('User', JSON.stringify(formLogin));
                 this.props.history.push('/list');
             } else {
-                document.getElementById("err").style.display = "block";
+                document.getElementById("error").style.display = "block";
             }
         }
     };
@@ -49,20 +49,20 @@ class LoginPage extends React.Component {
 
         return (
             <div id='body'>
-                <div>
+                <div id='sign-in-and-sign-up'>
                     <p id='title'>Login Page</p>
-                    <form id='LandP' onSubmit={this.ViewError}>
+                    <form id='sign-in-form' onSubmit={this.viewError}>
                         <p>Name</p>
-                        <input type="text" name='login' placeholder="Name" id="login" required />
+                        <input type="text" name='login' placeholder="Name" className="login" required />
                         <p>Password</p>
                         <input type="password" name='password' placeholder="Password" className="password" required />
                         <br />
-                        <div>
-                            <button type='submit' id="SignIn">SignIn</button>
-                            <button id="reg" onClick={this.click}>Register</button>
+                        <div className="button-panel">
+                            <button type='submit' id="sign-in">SignIn</button>
+                            <button id="sign-up" onClick={this.click}>SignUp</button>
                         </div>
                     </form>
-                    <div id='err'>
+                    <div id='error'>
                         <p>Incorrect login or password</p>
                     </div>
                 </div>
