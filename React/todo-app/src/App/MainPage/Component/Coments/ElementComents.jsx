@@ -10,7 +10,7 @@ class ElementComents extends React.Component {
 
         let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('ListArray'));
         const index = arrayFromlocalStorage.findIndex((value) => {
-            return value.id == this.props.match.params.ElementId;
+            return value.id === +this.props.match.params.ElementId;
         });
         if (this.props.match.params.ElementId >= 0) {
             this.state = {
@@ -38,7 +38,6 @@ class ElementComents extends React.Component {
 
 
     AddComent = (e) => {
-        debugger
         e.preventDefault();
         const ComentArray = this.state.Coment;
 
@@ -62,17 +61,9 @@ class ElementComents extends React.Component {
         this.setState({
             Coment: ComentArray
         });
-        let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('ListArray'));
-        const index = arrayFromlocalStorage.findIndex((value) => {
-            return value.id == this.props.match.params.ElementId;
-        });
-        arrayFromlocalStorage[index].coments = this.state.Coment;
-        window.localStorage.setItem('ListArray', JSON.stringify(arrayFromlocalStorage));
     };
 
-
     RemoveComent = (id) => {
-        debugger
         const ComentArray = this.state.Coment;
         const item = ComentArray.find((value) => {
             return value.id == id;
@@ -82,7 +73,9 @@ class ElementComents extends React.Component {
                 return item.id != value.id;
             })
         });
+    };
 
+    componentDidUpdate() {
         let arrayFromlocalStorage = JSON.parse(window.localStorage.getItem('ListArray'));
         const index = arrayFromlocalStorage.findIndex((value) => {
             return value.id == this.props.match.params.ElementId;
@@ -92,6 +85,9 @@ class ElementComents extends React.Component {
     };
 
     render() {
+
+
+
         return (
             <div>
                 {this.state.Element.map((val) => (
@@ -105,7 +101,10 @@ class ElementComents extends React.Component {
                             <div id='ComentBody'>
                                 {this.state.Coment.map((coment) => (
                                     <ul id='ComentList'>
-                                        <li id={coment.id} key={coment.id + 'item'}>{coment.name}
+                                        <li id={coment.id} key={coment.id + 'item'}>
+                                            <pre>
+                                                {coment.name}
+                                            </pre>
                                             <div id='InfoAndRemome'>
                                                 <div id='ComentInfo'>
                                                     <div id='cInfo'>
