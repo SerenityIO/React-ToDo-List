@@ -62,7 +62,7 @@ html {
     box-shadow: 0px 0px 26px 1px rgba(89, 255, 241, 1);
 }
 
-.button-panel{
+.button-panel {
     width: 230px;
     display: flex;
     flex-direction: row;

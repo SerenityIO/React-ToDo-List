@@ -41,7 +41,7 @@ class LoginPage extends React.Component {
     };
 
     click = () => {
-        this.props.history.push('/register');
+        this.props.history.push('/signUp');
     };
 
     render() {
@@ -63,7 +63,7 @@ class LoginPage extends React.Component {
                         </div>
                     </form>
                     <div id='error'>
-                        <p>Incorrect login or password</p>
+                        <p><b>Incorrect login or password</b></p>
                     </div>
                 </div>
             </div>
