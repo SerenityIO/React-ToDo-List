@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
-import './LoginPage.css';
+import './SignInPage.css';
 
-class LoginPage extends React.Component {
+class SignInPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -14,7 +14,7 @@ class LoginPage extends React.Component {
             };
         } else {
             this.state = {
-                DataBase: [{
+                DataFBase: [{
                     id: 0,
                     login: 'admin',
                     password: 'admin'
@@ -50,7 +50,7 @@ class LoginPage extends React.Component {
         return (
             <div id='body'>
                 <div id='sign-in-and-sign-up'>
-                    <p id='title'>Login Page</p>
+                    <p id='title'>SignIn Page</p>
                     <form id='sign-in-form' onSubmit={this.viewError}>
                         <p>Name</p>
                         <input type="text" name='login' placeholder="Name" className="login" required />
@@ -71,4 +71,4 @@ class LoginPage extends React.Component {
     };
 };
 
-export default withRouter(LoginPage);
+export default withRouter(SignInPage);
