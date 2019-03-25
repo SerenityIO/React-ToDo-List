@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 
 class MainList extends React.Component {
-    GoToComents = (id) => {
+    goToComents = (id) => {
         this.props.history.push(`/elements/${id}`);
     };
 
@@ -11,19 +11,19 @@ class MainList extends React.Component {
             <ul id='list'>
                 {this.props.MyList.map((val) => (
                     <li id={val.id} key={val.id + 'item'} className={this.props.getLiClassName(val.done, val.checked)} >
-                        <div id='name'>{val.name}</div>
+                        <div className='name'>{val.name}</div>
                         <input type="checkbox" checked={val.checked} className="check" onChange={() => this.props.handleCheck(val.id)} />
                         <div className="button" onClick={() => this.props.handleRemoveItem(val.id)}></div>
-                        <div className="DoneEditCopy">
-                        <button type="submit" onClick={() => this.GoToComents(val.id)}>Coments</button>
-                            <button type="submit" className={val.done ? "Undone" : "Done"} onClick={() => this.props.handleDone(val.id)}>{val.done ? "Undone" : "Done"}</button>
-                            <button type="submit" className="Edit" onClick={() => this.props.handleEditElement(val.id)}>Edit</button>
-                            <button type="submit" className="Copy" onClick={() => this.props.handleCopyElement(val.id)}>Copy</button>
+                        <div className="done-edit-copy">
+                            <button type="submit" className="coment" onClick={() => this.goToComents(val.id)}>Comments</button>
+                            <button type="submit" className={val.done ? "undone" : "done"} onClick={() => this.props.handleDone(val.id)}>{val.done ? "Undone" : "Done"}</button>
+                            <button type="submit" className="edit" onClick={() => this.props.handleEditElement(val.id)}>Edit</button>
+                            <button type="submit" className="copy" onClick={() => this.props.handleCopyElement(val.id)}>Copy</button>
                         </div>
-                        <div id='info'>
-                            <div id='author'>
-                                <p><b>Create: </b><i id='g'>{val.author}</i></p>
-                                <p><b>LastChanges: </b><i id='r'>{val.LastChanges}</i></p>
+                        <div className='info'>
+                            <div className='author'>
+                                <p><b>Create: </b><i className='g'>{val.author}</i></p>
+                                <p><b>LastChanges: </b><i className='r'>{val.LastChanges}</i></p>
                             </div>
                         </div>
                     </li>

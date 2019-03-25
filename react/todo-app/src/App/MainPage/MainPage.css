@@ -5,6 +5,10 @@
 
 /*Стиль хедеру*/
 
+main {
+    width: 100%;
+}
+
 header {
     width: 100%;
     background-color: rgb(244, 67, 54);
@@ -222,7 +226,7 @@ menu input {
     opacity: 1;
 }
 
-#author {
+.author {
     font-size: 12pt;
     min-height: 36px;
     min-width: 170px;
@@ -243,15 +247,15 @@ menu input {
     transition: all.6s ease;
 }
 
-#g {
+.g {
     color: rgb(30, 245, 30);
 }
 
-#r {
+.r {
     color: rgb(238, 28, 28);
 }
 
-#info {
+.info {
     background-image: url(image/info.svg);
     transition: all.6s ease;
     height: 32px;
@@ -267,12 +271,12 @@ menu input {
     background-position-y: 8px;
 }
 
-#info:hover #author {
+.info:hover .author {
     transition: all.6s ease;
     display: block;
 }
 
-#info:hover {
+.info:hover {
     transition: all.6s ease;
     background-size: 24px;
     background-position-x: 4px;
@@ -280,25 +284,25 @@ menu input {
     display: block;
 }
 
-.DoneEditCopy {
+.done-edit-copy {
     position: absolute;
     right: 70px;
 }
 
-.Done, .Edit, .Copy, .Undone {
+.done, .edit, .copy, .undone, .coment {
     margin: 0 5px;
     padding: 1px 5px;
     border-radius: 5px;
     border: 1px solid gray;
 }
 
-.Undone {
+.undone {
     transition: all.3s ease;
     background-color: rgb(230, 51, 51);
     color: rgb(0, 255, 13);
 }
 
-.Done {
+.done {
     transition: all.3s ease;
     background-color: green;
     color: rgb(255, 255, 255);

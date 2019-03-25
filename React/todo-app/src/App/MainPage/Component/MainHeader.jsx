@@ -3,12 +3,11 @@ import { withRouter } from "react-router-dom";
 
 class MainHeader extends React.Component {
     clickExit = () => {
-        // window.localStorage.removeItem("User");
-        this.props.history.push('/login');
+        window.localStorage.removeItem("User");
+        this.props.history.goBack();
     };
 
     render() {
-
         return (
             <header>
                 <div id='head'>
@@ -28,4 +27,5 @@ class MainHeader extends React.Component {
         )
     }
 }
+
 export default withRouter(MainHeader);

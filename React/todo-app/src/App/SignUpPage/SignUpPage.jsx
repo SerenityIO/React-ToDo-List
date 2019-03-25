@@ -41,7 +41,7 @@ class SignUpPage extends React.Component {
             })
 
             window.localStorage.setItem('DataBase', JSON.stringify(dataBase));
-            this.props.history.push('/login');
+            this.props.history.push('/signIn');
         } else {
             document.getElementById("error").style.display = "block";
         }
