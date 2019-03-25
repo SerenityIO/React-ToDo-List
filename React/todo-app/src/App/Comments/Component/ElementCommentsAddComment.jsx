@@ -12,13 +12,14 @@ class ElementComentsAddComent extends React.Component {
     }
     render() {
         return (
-            <div id='ComentAddPanel'>
-                <form onSubmit={this.props.AddComent}>
-                    <textarea id='ComentName' onKeyDown={this.handleKeyDown}></textarea>
-                    <button id='ComentButton' type='submit'>Add Coment</button>
+            <div id='coment-add-panel'>
+                <form onSubmit={this.props.addComent}>
+                    <textarea id='coment-name' onKeyDown={this.handleKeyDown} required></textarea>
+                    <button id='coment-button' type='submit'>Add Coment</button>
                 </form>
             </div>
         )
     }
 }
+
 export default withRouter(ElementComentsAddComent);

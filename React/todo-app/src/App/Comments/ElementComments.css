@@ -1,5 +1,9 @@
+#main-coment {
+    width: 100%;
+}
+
 #elements {
-    min-width: 600px;
+    width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -16,25 +20,25 @@
     border-bottom: 3px solid rgb(173, 153, 153);
 }
 
-#elements #header #NameBlock {
+#elements #header #name-block {
     max-width: 50%;
     display: flex;
     height: 30px;
     flex-direction: row;
 }
 
-#elements #header #NameInput {
+#elements #header #name-input {
     margin-left: 10px;
     font-size: 14pt;
 }
 
-#elements #header #NameTitle {
+#elements #header #name-title {
     color: rgb(255, 255, 255);
     margin-left: 10px;
     font-size: 16pt;
 }
 
-#elements #header #AuthorAndEditBlock {
+#elements #header #author-and-edit-block {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -43,33 +47,33 @@
     top: 3px
 }
 
-#elements #header #AuthorAndEditBlock #AuthorName {
+#elements #header #author-and-edit-block #author-name {
     color: rgb(0, 255, 0);
 }
 
-#elements #header #AuthorAndEditBlock #EditName {
+#elements #header #author-and-edit-block #edit-name {
     color: rgb(96, 0, 252);
 }
 
-#elements #header #BackToList {
+#elements #header #back-to-list {
     position: absolute;
     right: 13px;
     transition: all.3s ease;
     height: 24px;
     width: 24px;
-    background-image: url(../../image/exit-active.svg);
+    background-image: url(../MainPage/image/exit-active.svg);
     background-repeat: no-repeat;
 }
 
-#elements #header #BackToList:hover {
+#elements #header #back-to-list:hover {
     transition: all.3s ease;
     height: 24px;
     width: 24px;
-    background-image: url(../../image/exit.svg);
+    background-image: url(../MainPage/image/exit.svg);
     background-repeat: no-repeat;
 }
 
-#elements #ComentBlock {
+#elements #coment-block {
     width: 70%;
     min-width: 400px;
     margin-top: 10px;
@@ -77,7 +81,7 @@
     border-radius: 0px 0px 10px 10px;
 }
 
-#elements #ComentBlock #ComentAddPanel {
+#elements #coment-block #coment-add-panel {
     height: 50px;
     display: flex;
     flex-direction: row;
@@ -86,49 +90,49 @@
     border-radius: 0px 0px 10px 10px;
 }
 
-#elements #ComentBlock #ComentAddPanel #ComentName {
+#elements #coment-block #coment-add-panel #coment-name {
     width: 40%;
     height: 32px;
     resize: none;
 }
 
-#elements #ComentBlock #ComentAddPanel #ComentButton {
+#elements #coment-block #coment-add-panel #coment-button {
     width: 20%;
     height: 34px;
 }
 
-#elements #ComentBlock #ComentBody {
+#elements #coment-block #coment-body {
     max-height: 400px;
     overflow: auto;
     position: relative;
-    
 }
 
-#elements #ComentBlock #ComentList {
+#elements #coment-block #coment-list {
     list-style-type: none;
     max-height: 400px;
     overflow: auto;
 }
 
-#elements #ComentBlock #ComentList li {
+#elements #coment-block #coment-list li {
     display: flex;
     justify-content: space-between;
-    min-height: 30px;
+    min-height: 36px;
     padding-left: 2px;
     align-items: center;
     border: 1px solid silver;
     background-color: rgb(238, 238, 238);
 }
 
-#elements #ComentBlock #ComentList li #InfoAndRemome{
+#elements #coment-block #coment-list li .info-and-remome {
     display: flex;
     flex-direction: row;
 }
-#elements #ComentBlock #ComentList li #InfoAndRemome #RemoveComent{
+
+#elements #coment-block #coment-list li .info-and-remome .remove-coment {
     display: flex;
     position: relative;
     right: 0;
-    background-image: url(../../image/unchecked.svg);
+    background-image: url(../MainPage/image/unchecked.svg);
     background-repeat: no-repeat;
     width: 32px;
     height: 32px;
@@ -139,19 +143,18 @@
     transition: all.6s ease;
 }
 
-#elements #ComentBlock #ComentList li #InfoAndRemome #RemoveComent:hover {
+#elements #coment-block #coment-list li .info-and-remome .remove-coment:hover {
     opacity: 1;
-    background-image: url(../../image/unchecked.svg);
+    background-image: url(../MainPage/image/unchecked.svg);
     transition: all.6s ease;
 }
 
-#elements #ComentBlock #ComentList li #InfoAndRemome #ComentInfo{
-    background-image: url(../../image/info.svg);
+#elements #coment-block #coment-list li .info-and-remome .coment-info {
+    background-image: url(../MainPage/image/info.svg);
     transition: all.6s ease;
     height: 32px;
     width: 32px;
     position: relative;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -161,7 +164,7 @@
     background-position-y: 8px;
 }
 
-#elements #ComentBlock #ComentList li #InfoAndRemome #ComentInfo:hover {
+#elements #coment-block #coment-list li .info-and-remome .coment-info:hover {
     transition: all.6s ease;
     background-size: 24px;
     background-position-x: 4px;
@@ -169,13 +172,12 @@
     display: block;
 }
 
-#elements #ComentBlock #ComentList li #InfoAndRemome #ComentInfo:hover #cInfo {
+#elements #coment-block #coment-list li .info-and-remome .coment-info:hover .c-info {
     transition: all.6s ease;
-    display: block;  
+    display: block;
 }
 
-
-#elements #ComentBlock #ComentList li #InfoAndRemome #ComentInfo #cInfo{
+#elements #coment-block #coment-list li .info-and-remome .coment-info .c-info {
     font-size: 12pt;
     min-height: 36px;
     width: max-content;
@@ -185,18 +187,17 @@
     z-index: 5;
     bottom: 1%;
     right: 30px;
+    top: -3px;
     justify-content: center;
     flex-direction: column;
     border: 1px solid silver;
     background-color: rgb(255, 255, 255);
-    border-radius: 0px 7px 7px 7px;
+    border-radius: 7px;
     display: none;
-    
     color: black;
     transition: all.6s ease;
 }
 
-#elements #ComentBlock #ComentList li #InfoAndRemome #ComentInfo #cInfo #date{
+#elements #coment-block #coment-list li .info-and-remome .coment-info .c-info .date {
     color: rgb(0, 132, 255);
 }
-

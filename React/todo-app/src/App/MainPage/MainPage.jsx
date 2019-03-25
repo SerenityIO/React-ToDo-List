@@ -166,7 +166,7 @@ class MainPage extends React.Component {
         window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
 
         if (!JSON.parse(window.localStorage.getItem('User'))) {
-            this.props.history.push('/login');
+            this.props.history.push('/signIn');
         }
         return (
             <main>
