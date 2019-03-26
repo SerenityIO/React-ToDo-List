@@ -1,5 +1,8 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import { toggleHeader } from '../../../actions';
 
 class MainHeader extends React.Component {
     clickExit = () => {
@@ -11,7 +14,7 @@ class MainHeader extends React.Component {
         return (
             <header>
                 <div id='head'>
-                    <h3 id='titleToDo'>My ToDo-List</h3>
+                    <h3 id='titleToDo' onClick={() => this.props.toggleHeader('Welcome')}>{this.props.header}</h3>
                     <h3 id='welcome'>Welcome, <ins><b>{JSON.parse(window.localStorage.getItem('User'))}</b></ins></h3>
                     <div id='exit' onClick={this.clickExit}></div>
                 </div>
@@ -27,5 +30,17 @@ class MainHeader extends React.Component {
         )
     }
 }
+const mapStateToProps = store => {
+    return {
+        header: store.header
+    };
+}
 
-export default withRouter(MainHeader);
+const mapDispatchToProps = dispatch => {
+    return {
+        toggleHeader: bindActionCreators(toggleHeader, dispatch)
+    }
+}
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(MainHeader)
+);
