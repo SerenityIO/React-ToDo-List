@@ -23,9 +23,9 @@ class ElementComments extends React.Component {
                     checked: arrayFromlocalStorage[index].checked,
                     author: arrayFromlocalStorage[index].author,
                     LastChanges: arrayFromlocalStorage[index].LastChanges,
-                    coments: []
+                    comments: []
                 },
-                Coments: arrayFromlocalStorage[index].coments
+                Comments: arrayFromlocalStorage[index].comments
             };
         }
         else {
@@ -53,39 +53,39 @@ class ElementComments extends React.Component {
         }, 300);
     };
 
-    addComent = (event) => {
+    addComment = (event) => {
         event.preventDefault();
-        const ComentsArray = this.state.Coments;
+        const CommentsArray = this.state.Comments;
 
-        if (ComentsArray.length === 0) {
+        if (CommentsArray.length === 0) {
             let i = 0;
-            window.localStorage.setItem('Coment_ID', JSON.stringify(i));
+            window.localStorage.setItem('Comment_ID', JSON.stringify(i));
         };
 
-        let Coment_ID = JSON.parse(window.localStorage.getItem('Coment_ID'));
+        let Comment_ID = JSON.parse(window.localStorage.getItem('Comment_ID'));
         var l = new Date();
         var time = l.toLocaleString()
-        ComentsArray.push({
-            id: Coment_ID,
+        CommentsArray.push({
+            id: Comment_ID,
             name: event.target[0].value,
             author: JSON.parse(window.localStorage.getItem('User')),
             time: time
         });
-        Coment_ID++;
-        window.localStorage.setItem('Coment_ID', JSON.stringify(Coment_ID));
+        Comment_ID++;
+        window.localStorage.setItem('Comment_ID', JSON.stringify(Comment_ID));
         event.target.reset();
         this.setState({
-            Coments: ComentsArray
+            Comments: CommentsArray
         });
     };
 
-    removeComent = (id) => {
-        const ComentsArray = this.state.Coments;
-        const item = ComentsArray.find((value) => {
+    removeComment = (id) => {
+        const CommentsArray = this.state.Comments;
+        const item = CommentsArray.find((value) => {
             return value.id === +id;
         })
         this.setState({
-            Coments: ComentsArray.filter((value) => {
+            Comments: CommentsArray.filter((value) => {
                 return item.id !== +value.id;
             })
         });
@@ -99,7 +99,7 @@ class ElementComments extends React.Component {
         arrayFromlocalStorage[index] = {
             ...this.state.Element
         };
-        arrayFromlocalStorage[index].coments = this.state.Coments;
+        arrayFromlocalStorage[index].comments = this.state.Comments;
         window.localStorage.setItem('ListArray', JSON.stringify(arrayFromlocalStorage));
     };
 
@@ -115,11 +115,11 @@ class ElementComments extends React.Component {
                     />
                     <div id='coment-block'>
                         <ElementCommentsComment
-                            coments={this.state.Coments}
-                            removeComent={this.removeComent}
+                            comments={this.state.Comments}
+                            removeComment={this.removeComment}
                         />
                         <ElementCommentsAddComment
-                            addComent={this.addComent}
+                            addComment={this.addComment}
                         />
                     </div>
                 </div>

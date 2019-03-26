@@ -65,7 +65,7 @@ class MainPage extends React.Component {
             checked: false,
             author: JSON.parse(window.localStorage.getItem('User')),
             LastChanges: 'Is not edit!',
-            coments: []
+            comments: []
         });
         ID++;
         window.localStorage.setItem('ID', JSON.stringify(ID));
@@ -118,7 +118,7 @@ class MainPage extends React.Component {
             checked: ListArray[index].checked,
             author: ListArray[index].author,
             LastChanges: 'Is not edit!',
-            coments: [].ListArray[index].coments
+            comments: ListArray[index].comments
         });
         ID++;
         window.localStorage.setItem('ID', JSON.stringify(ID));

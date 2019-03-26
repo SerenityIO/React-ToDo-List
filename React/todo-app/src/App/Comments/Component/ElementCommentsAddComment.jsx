@@ -13,7 +13,7 @@ class ElementComentsAddComent extends React.Component {
     render() {
         return (
             <div id='coment-add-panel'>
-                <form onSubmit={this.props.addComent}>
+                <form onSubmit={this.props.addComment}>
                     <textarea id='coment-name' onKeyDown={this.handleKeyDown} required></textarea>
                     <button id='coment-button' type='submit'>Add Coment</button>
                 </form>
