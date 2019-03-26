@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 
-class ElementCommentsComent extends React.Component {
+class ElementCommentsComment extends React.Component {
     render() {
         return (
             <ul id='coment-list'>
@@ -29,4 +29,4 @@ class ElementCommentsComent extends React.Component {
     }
 }
 
-export default withRouter(ElementCommentsComent);
+export default withRouter(ElementCommentsComment);

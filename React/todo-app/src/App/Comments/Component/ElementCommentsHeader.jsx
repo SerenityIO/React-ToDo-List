@@ -11,7 +11,13 @@ class ElementCommentsHeader extends React.Component {
             <div id='header'>
                 <div id='name-block'>
                     <h3 id="name-title">Name:</h3>
-                    <input id='name-input' type="text" onChange={this.props.handleNameChange} defaultValue={this.props.elementName} required/>
+                    <input
+                        id='name-input'
+                        type="text"
+                        onChange={this.props.handleNameChange}
+                        defaultValue={this.props.elementName}
+                        required
+                    />
                 </div>
                 <div id='author-and-edit-block'>
                     <h3>Author: <i id='author-name'><u>{this.props.authorName}</u></i></h3>

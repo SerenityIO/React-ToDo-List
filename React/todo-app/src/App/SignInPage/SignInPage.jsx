@@ -53,9 +53,21 @@ class SignInPage extends React.Component {
                     <p id='title'>SignIn Page</p>
                     <form id='sign-in-form' onSubmit={this.viewError}>
                         <p>Name</p>
-                        <input type="text" name='login' placeholder="Name" className="login" required />
+                        <input
+                            type="text"
+                            name='login'
+                            placeholder="Name"
+                            className="login"
+                            required
+                        />
                         <p>Password</p>
-                        <input type="password" name='password' placeholder="Password" className="password" required />
+                        <input
+                            type="password"
+                            name='password'
+                            placeholder="Password"
+                            className="password"
+                            required
+                        />
                         <br />
                         <div className="button-panel">
                             <button type='submit' id="sign-in">SignIn</button>

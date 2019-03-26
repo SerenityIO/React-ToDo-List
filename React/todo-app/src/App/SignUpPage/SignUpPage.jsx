@@ -60,11 +60,28 @@ class SignUpPage extends React.Component {
                     <p id='title'>Sign Up Page</p>
                     <form id='sign-up-form' onSubmit={this.signUp}>
                         <p>Name</p>
-                        <input type="text" name='login' placeholder="Name" className="login" required />
+                        <input
+                            type="text"
+                            name='login'
+                            placeholder="Name"
+                            className="login"
+                            required
+                        />
                         <p>Password</p>
-                        <input type="password" name='password1' placeholder="Password" className="password" required />
+                        <input
+                            type="password"
+                            name='password1'
+                            placeholder="Password"
+                            className="password"
+                            required
+                        />
                         <p>Repeate password</p>
-                        <input type="password" name='password2' placeholder="Repete password" className="password" required />
+                        <input
+                            type="password"
+                            name='password2'
+                            placeholder="Repeate password"
+                            className="password"
+                            required />
                         <br />
                         <div className="button-panel">
                             <button type='submit' id="sign-up">SignUp</button>

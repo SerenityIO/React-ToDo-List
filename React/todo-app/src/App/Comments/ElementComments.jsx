@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import ElementCommentsHeader from "./Component/ElementCommentsHeader";
 import ElementCommentsAddComment from "./Component/ElementCommentsAddComment";
-import ElementComentsComent from "./Component/ElementComentsComent";
+import ElementCommentsComment from "./Component/ElementCommentsComment";
 import "./ElementComments.css";
 
 let nameDebounce = null;
@@ -114,7 +114,7 @@ class ElementComments extends React.Component {
                         handleNameChange={this.handleNameChange}
                     />
                     <div id='coment-block'>
-                        <ElementComentsComent
+                        <ElementCommentsComment
                             coments={this.state.Coments}
                             removeComent={this.removeComent}
                         />

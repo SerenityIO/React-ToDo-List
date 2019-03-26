@@ -10,15 +10,40 @@ class MainList extends React.Component {
         return (
             <ul id='list'>
                 {this.props.MyList.map((val) => (
-                    <li id={val.id} key={val.id + 'item'} className={this.props.getLiClassName(val.done, val.checked)} >
+                    <li
+                        id={val.id}
+                        key={val.id + 'item'}
+                        className={this.props.getLiClassName(val.done, val.checked)}
+                    >
                         <div className='name'>{val.name}</div>
-                        <input type="checkbox" checked={val.checked} className="check" onChange={() => this.props.handleCheck(val.id)} />
+                        <input
+                            type="checkbox"
+                            checked={val.checked}
+                            className="check"
+                            onChange={() => this.props.handleCheck(val.id)}
+                        />
                         <div className="button" onClick={() => this.props.handleRemoveItem(val.id)}></div>
                         <div className="done-edit-copy">
-                            <button type="submit" className="coment" onClick={() => this.goToComents(val.id)}>Comments</button>
-                            <button type="submit" className={val.done ? "undone" : "done"} onClick={() => this.props.handleDone(val.id)}>{val.done ? "Undone" : "Done"}</button>
-                            <button type="submit" className="edit" onClick={() => this.props.handleEditElement(val.id)}>Edit</button>
-                            <button type="submit" className="copy" onClick={() => this.props.handleCopyElement(val.id)}>Copy</button>
+                            <button
+                                type="submit"
+                                className="coment"
+                                onClick={() => this.goToComents(val.id)}
+                            >Comments</button>
+                            <button
+                                type="submit"
+                                className={val.done ? "undone" : "done"}
+                                onClick={() => this.props.handleDone(val.id)}
+                            >{val.done ? "Undone" : "Done"}</button>
+                            <button
+                                type="submit"
+                                className="edit"
+                                onClick={() => this.props.handleEditElement(val.id)}
+                            >Edit</button>
+                            <button
+                                type="submit"
+                                className="copy"
+                                onClick={() => this.props.handleCopyElement(val.id)}
+                            >Copy</button>
                         </div>
                         <div className='info'>
                             <div className='author'>
