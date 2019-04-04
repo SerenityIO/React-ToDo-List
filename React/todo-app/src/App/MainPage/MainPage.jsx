@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import MainHeader from "./Component/MainHeader";
 import MainList from "./Component/MainList";
 import './MainPage.css';
@@ -161,6 +162,11 @@ class MainPage extends React.Component {
         return className;
     }
 
+    
+    componentDidUpdate(){
+        window.localStorage.setItem('ListArray', JSON.stringify(this.props.store));
+    }
+
     render() {
         let ListArray = this.state.MyList;
         window.localStorage.setItem('ListArray', JSON.stringify(ListArray));
@@ -171,23 +177,29 @@ class MainPage extends React.Component {
         return (
             <main>
                 <MainHeader
-                    handleAddItem={this.handleAddItem}
-                    handleCheckAllItem={this.handleCheckAllItem}
-                    handleRemoveCheckItem={this.handleRemoveCheckItem}
+                    // handleAddItem={this.handleAddItem}
+                    // handleCheckAllItem={this.handleCheckAllItem}
+                    // handleRemoveCheckItem={this.handleRemoveCheckItem}
                 />
                 <MainList
-                    MyList={this.state.MyList}
-                    getLiClassName={this.getLiClassName}
-                    handleCheck={this.handleCheck}
-                    handleRemoveItem={this.handleRemoveItem}
-                    handleDone={this.handleDone}
-                    handleEditElement={this.handleEditElement}
-                    handleCopyElement={this.handleCopyElement}
+                    // MyList={this.state.MyList}
+                    // getLiClassName={this.getLiClassName}
+                    // handleCheck={this.handleCheck}
+                    // handleRemoveItem={this.handleRemoveItem}
+                    // handleDone={this.handleDone}
+                    // handleEditElement={this.handleEditElement}
+                    // handleCopyElement={this.handleCopyElement}
                 />
             </main>
         )
     };
 };
 
-export default withRouter(MainPage);
+export default withRouter(
+    connect(state => ({
+        store: state.list
+    }),
+        dispatch => ({})
+    )(MainPage)
+);
 

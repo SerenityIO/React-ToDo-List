@@ -2,14 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import rootReducer from './reducers';
 import { render } from 'react-dom';
+import reducer from './reducers';
 import SignInPage from './App/SignInPage/SignInPage';
 import SignUpPage from './App/SignUpPage/SignUpPage';
 import MainPage from './App/MainPage/MainPage';
 import ElementComments from './App/Comments/ElementComments';
 
-const store = createStore(rootReducer)
+const store = createStore(reducer);
+
 class App extends React.Component {
     render() {
         return (
