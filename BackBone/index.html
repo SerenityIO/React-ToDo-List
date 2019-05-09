@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +8,40 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/list.css">
+    <script type="text/javascript" src="js/lib/jquery-3.4.1.js"></script>
+    <script src="js/lib/underscore.js"></script>
+    <script src="js/lib/backbone.js"></script>
+    <script src="js/models/ModelTodo.js"></script>
+    <script src="js/views/ViewTodos.js"></script>
+    <script src="js/main.js"></script>
     <title>To-Do List</title>
 </head>
+
 <body>
     <header>
         <h3>To-Do List</h3>
-        <form action="" id="add-form">
-            <input type="text">
+        <form id="add-form">
+            <input type="text" required>
             <button>ADD</button>
         </form>
     </header>
     <main>
         <ul id="list">
-            <li class="element">Test 1<div class="delete"></div></li>
-            <li class="element">Test 2<div class="delete"></div></li>
-            <li class="element">Test 3<div class="delete"></div></li>
+
         </ul>
     </main>
-    <script src="js/underscore.js"></script>
-    <script src="js/backbone.js"></script>
-    <script src="js/main.js"></script>
+    <script type="text/template" id="viewList">
+        <li class="element"><div class='text'><%- name %></div><input class='check' type="checkbox"/><div class="delete"></div></li>
+    </script>
+    <script>
+        $(function () {
+            var modell = new ModelTodo();
+            var view = new ViewTodos({
+                model: modell,
+                el: "#list"
+            });
+        });
+    </script>
 </body>
+
 </html>
