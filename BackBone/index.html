@@ -12,35 +12,28 @@
     <script src="js/lib/underscore.js"></script>
     <script src="js/lib/backbone.js"></script>
     <script src="js/models/ModelTodo.js"></script>
+    <script src="js/collections/CollectionTodo.js"></script>
+    <script src="js/views/ViewTodo.js"></script>
     <script src="js/views/ViewTodos.js"></script>
     <script src="js/main.js"></script>
     <title>To-Do List</title>
 </head>
 
 <body>
-    <header>
-        <h3>To-Do List</h3>
-        <form id="add-form">
-            <input type="text" required>
-            <button>ADD</button>
-        </form>
-    </header>
-    <main>
-        <ul id="list">
-
-        </ul>
+    <script type="text/template" id="header">
+        <header>
+            <h3>To-Do List</h3>
+            <form id="add-form">
+                <input id='addText' type="text" name='name' required />
+                <button id="add">ADD</button>
+            </form>
+        </header>
+        <ul id="list"></ul>
+    </script>
+    <main id='main'>
     </main>
     <script type="text/template" id="viewList">
-        <li class="element"><div class='text'><%- name %></div><input class='check' type="checkbox"/><div class="delete"></div></li>
-    </script>
-    <script>
-        $(function () {
-            var modell = new ModelTodo();
-            var view = new ViewTodos({
-                model: modell,
-                el: "#list"
-            });
-        });
+        <li class="element" id='<%- id%>'><input class='check' type="checkbox"/><span class='name' contenteditable="true"><%- name %></span><div class="delete"></div></li>
     </script>
 </body>
 

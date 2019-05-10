@@ -18,15 +18,15 @@
     background-color: rgb(249, 249, 249);
 }
 
-#list .text{
-    padding-left: 32px;
+#list .name{
+    font-size: 22px;
+    font-family: sans-serif; 
 }
 
 #list li input[type='checkbox']{
     width: 18px;
     height: 18px;
-    position: absolute;
-    left: 6px;
+    margin: 7px
 }
 
 #list .delete{
@@ -48,4 +48,16 @@
     opacity: 1;
     background-image: url(../image/unchecked.svg);
     transition: all.6s ease;    
+}
+
+#list .complete:nth-child(odd) {
+    transition: all.3s ease;
+    background-color: rgb(193, 255, 193);
+    color: rgb(0, 83, 4);
+}
+
+#list .complete:nth-child(even) {
+    transition: all.3s ease;
+    background-color: rgb(105, 241, 105);
+    color: rgb(0, 83, 4);
 }
