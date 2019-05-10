@@ -30,10 +30,18 @@
         </header>
         <ul id="list"></ul>
     </script>
-    <main id='main'>
-    </main>
+    <main id='main'></main>
     <script type="text/template" id="viewList">
-        <li class="element" id='<%- id%>'><input class='check' type="checkbox"/><span class='name' contenteditable="true"><%- name %></span><div class="delete"></div></li>
+        <li class="element <%- (completed) ? 'complete' : '' %>" id='<%- id%>'>
+            <input class='check' type="checkbox"/>
+            <span class='name' contenteditable="true"><%- name %></span>
+            <div class="btn-panel">
+                <button class="<%- (completed) ? 'completed' : 'uncompleted' %>"><%- (completed) ? 'Undone' : 'Done'%></button>
+                <button class='clone'>Copy</button>
+                <button class='comments'>Comments</button>
+            </div>
+            <div class="delete"></div>
+        </li>
     </script>
 </body>
 

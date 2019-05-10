@@ -2,6 +2,8 @@ var ViewTodo = Backbone.View.extend({
     
     events: {
         "click .delete": "handleDelete",
+        "click .clone ": "handleCopy",
+        "click .completed, .uncompleted": "handleCompleted",
         "blur .name": "handleEditName"
     },
 
@@ -20,6 +22,25 @@ var ViewTodo = Backbone.View.extend({
 
     handleDelete: function() {
         this.model.destroy();
+    },
+
+    handleCopy: function(){
+        var mod = new ModelTodo();
+        var ID = JSON.parse(window.localStorage.getItem('ID'));
+        mod.id = ID;
+        mod.attributes.id = ID;
+        ID++;
+        mod.attributes.name = this.model.attributes.name ;
+        mod.attributes.checked = this.model.attributes.checked;
+        mod.attributes.completed = this.model.attributes.completed;
+        var view = new ViewTodo({model: mod});
+        this.$('#list').append(view.render());
+    },
+
+    handleCompleted: function() {
+        this.model.attributes.completed = !this.model.attributes.completed;
+        this.render();
+
     },
 
     handleEditName: function() {
