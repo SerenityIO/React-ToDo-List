@@ -26,7 +26,7 @@
 #list li input[type='checkbox']{
     width: 18px;
     height: 18px;
-    margin: 7px
+    margin: 7px;
 }
 
 #list .delete{
@@ -50,15 +50,14 @@
     transition: all.6s ease;    
 }
 
-#list .complete:nth-child(even) {
+.complete {
     transition: all.3s ease;
-    background-color: rgb(83, 255, 83);
     color: rgb(0, 83, 4);
 }
 
-#list .complete:nth-child(odd) {
+.complete {
     transition: all.3s ease;
-    background-color: rgb(140, 255, 140);
+    background-color: rgb(83, 255, 83);
     color: rgb(0, 83, 4);
 }
 
